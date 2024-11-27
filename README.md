@@ -3,4 +3,4 @@
 
 A few guides to get you started:
 
-* [Github Setup](github.Md)
+* [Github Setup](github.md)
