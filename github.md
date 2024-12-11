@@ -1,4 +1,4 @@
-## GitHub Setup and Proxy Configuration Guide
+## GitHub Set-up and Proxy Configuration Guide
 
 #### What is git and why is it helpful?
 
