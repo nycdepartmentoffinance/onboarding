@@ -90,9 +90,9 @@ renv::activate()
 
 For more information on how `renv` works, visit the documentation here: [https://rstudio.github.io/renv/articles/renv.html](https://rstudio.github.io/renv/articles/renv.html)
 
+## Proxy set-up
 
-
-
+Before you do too much (install packages, download data from database, etc), you'll want to follow the [proxy set up](proxy_R.md) instructions to make sure you are connecting to the internet correctly to mitigate any potential issues.
 
 
 
