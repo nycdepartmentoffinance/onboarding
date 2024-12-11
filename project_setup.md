@@ -72,3 +72,27 @@ Success! Now the new `.Rproj` file is saved to the online version of your reposi
 
 Now you're ready to get started with the rest of your project. It's good practice that every few hours or so you repeat these steps (`git add .`, `git commit -m ""`, and `git push`) to make sure your updates are being saved to your repository.
 
+## Using renv
+
+One additional set-up step that is really helpful when working a project with a lot of packages and possible package dependencies is `renv`. It tracks what packages need to be downloaded in order to run certain scripts and makes getting up to date with a project really fast.
+
+To get a more comprehensive answer for why it's helpful to use renv, read more here: [https://rstudio.github.io/renv/index.html](https://rstudio.github.io/renv/index.html)
+
+To use renv for your project, first install the package:
+```r
+install.packages("renv", dependencies=TRUE)
+```
+
+After it is installed, run the following to activate renv for your project:
+```
+renv::activate()
+```
+
+For more information on how `renv` works, visit the documentation here: [https://rstudio.github.io/renv/articles/renv.html](https://rstudio.github.io/renv/articles/renv.html)
+
+
+
+
+
+
+
