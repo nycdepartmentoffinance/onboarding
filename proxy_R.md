@@ -62,6 +62,64 @@ Whenever I need any of the above in a Rproj, I can use the following syntax in b
 Sys.getenv("fdw_username")
 ```
 
+**REALLY IMPORTANT NOTE**
+
+This file should not be added to your github repository. It should stay as a local file that only you should have access to. Your `.gitignore` file should have `.renviron` listed already (by setting up the Rproj and repository in github), but if it doesn't already, then you can add it.
+
+Because I used the github default R .gitignore file, here is what it looks like. You'll see that .Renviron is included on line 40 so when you `git add .` it will still stay untracked by git.
+```
+# History files
+.Rhistory
+.Rapp.history
+
+# Session Data files
+.RData
+.RDataTmp
+
+# User-specific files
+.Ruserdata
+
+# Example code in package build process
+*-Ex.R
+
+# Output files from R CMD build
+/*.tar.gz
+
+# Output files from R CMD check
+/*.Rcheck/
+
+# RStudio files
+.Rproj.user/
+
+# produced vignettes
+vignettes/*.html
+vignettes/*.pdf
+
+# OAuth2 token, see https://github.com/hadley/httr/releases/tag/v0.3
+.httr-oauth
+
+# knitr and R markdown default cache directories
+*_cache/
+/cache/
+
+# Temporary files created by R markdown
+*.utf8.md
+*.knit.md
+
+# R Environment Variables
+.Renviron
+
+# pkgdown site
+docs/
+
+# translation temp files
+po/*~
+
+# RStudio Connect folder
+rsconnect/
+```
+
+
 ## .rprofile
 
 Next, we need to save some settings to the `.Rprofile` file in order to work properly on the DOF Windows machines. Create the `.Rprofile` file by doing the following (if it is not already created).
