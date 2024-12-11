@@ -97,7 +97,7 @@ cd /workspace_local
 2. Clone this repository using the following command:
 
 ```{bash}
-git clone https://github.com/nycdepartmentoffinance/block_centroids.git -c "http.proxy=http://bcpxy.nycnet:8080" -c "https.proxy=https://bcpxy.nycnet:8080"
+git clone https://github.com/nycdepartmentoffinance/model_tc4.git -c "http.proxy=http://bcpxy.nycnet:8080" -c "https.proxy=https://bcpxy.nycnet:8080"
 ```
 
 3. Connect to github through your browser:
@@ -116,8 +116,8 @@ Now you can get started by putting git to the test! As you explore how to use gi
 feel free to refer back to these core resources that should have all you need to 
 implement the basic usages of git/GitHub.
 
-***Note:*** 99% of what we will do will be one of the following commands: git status, 
-git add ., git commit and git push.
+***Note:*** 99% of what we will do will be one of the following commands: `git status`, 
+`git add .`, `git commit` and `git push`.
 
 - **What is Git? Why Should We Use It?**  
   For a detailed overview of Git, check out this super helpful tutorial: [Happy Git with R](https://happygitwithr.com/big-picture).
