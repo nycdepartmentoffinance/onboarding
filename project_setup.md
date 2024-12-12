@@ -15,6 +15,8 @@
       ```
       git clone https://github.com/nycdepartmentoffinance/model_tc4.git -c "http.proxy=http://bcpxy.nycnet:8080" -c "https.proxy=https://bcpxy.nycnet:8080"
       ```
+    - a pop-up will likely come up which will ask you to log in to github (using your user/password or a personal access token).
+    - once you do that, the local clone should be complete!
 
 Now that the folder is set up with git, you can proceed to use it and all changes in the folder will be tracked. 
 
