@@ -6,6 +6,14 @@ Git is a tool (specifically a distributed version control system) that helps dev
 
 It's awesome.
 
+**What is the difference between git and GitHub?**
+
+In short, Git is a version control system that allows developers to track changes in their code, manage different versions, and collaborate on projects locally (as described above). GitHub is a cloud-based platform (website) that hosts Git repositories (folders), enabling collaboration among developers by providing tools for sharing code, managing projects, and tracking issues. While Git is used for version control on your local machine, GitHub offers remote repository hosting and additional collaboration features.
+
+Think about it like this: git is your personal assistant for a folder who is keeping track of when you 
+make changes and what versions of files are compatible with other versions. GitHub is the website where you can save 
+the folder (repository) and look back at earlier versions of the folder or other people's version of the folder.
+
 #### Downsides of git
 
 While Git is a powerful tool, there are some downsides to consider:
@@ -57,13 +65,6 @@ To make sure that git is downloaded, you can check by opening a terminal in comm
 
 ![image](https://github.com/user-attachments/assets/ba1bc394-efe8-41d4-9143-1bec13d38704)
 
-**What is the difference between git and GitHub?**
-
-In short, Git is a version control system that allows developers to track changes in their code, manage different versions, and collaborate on projects locally (as described above). GitHub is a cloud-based platform (website) that hosts Git repositories (folders), enabling collaboration among developers by providing tools for sharing code, managing projects, and tracking issues. While Git is used for version control on your local machine, GitHub offers remote repository hosting and additional collaboration features.
-
-Think about it like this: git is your personal assistant for a folder who is keeping track of when you 
-make changes and what versions of files are compatible with other versions. GitHub is the website where you can save 
-the folder (repository) and look back at earlier versions of the folder or other people's version of the folder.
 
 #### 4. Setting Up Git to Work Through the Proxy
 
