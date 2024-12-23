@@ -13,7 +13,7 @@ To verify if **Python** are properly installed and accessible from the command l
 3. If there is a version, then python is installed and the filepath to the executable (python.exe) is on your PATH. If nothing is returned from the above, then you need to complete a few more steps.
 4. Type the following command and press **Enter**:
   ```
-  where conda
+  where python
   ```
 5. If nothing is returned, then you need to find out where the `python.exe` file is saved on your machine (assuming it is already installed). To do that, search `python.exe` and open the file location.
 <img src="https://github.com/user-attachments/assets/2912c594-0c4b-41e6-b09c-db9cbcb36381" style="width:600px;"/>
@@ -27,7 +27,7 @@ To verify if **Python** are properly installed and accessible from the command l
 [How to add Conda to PATH](https://stackoverflow.com/questions/44515769/conda-is-not-recognized-as-internal-or-external-command).
 
 ### 2. Test to make sure that python is working correctly from Command Prompt
-In a new session of command prompt (not Anaconda Prompt), type the following:
+In a new session of command prompt, type the following:
 ```
 python
 ```
@@ -46,18 +46,20 @@ quit()
 
 ### 3. Set HTTP_PROXY and HTTPS_PROXY as environmental variables in your local machine
 
-Now that python is successfully set up, we can configure our proxy settings in order to connect to the internet properly. To do this, we need to set HTTP_PROXY and HTTPS_PROXY as environmental variables in your local machine.
+Now that python is successfully set up, we can configure our proxy settings in order to connect to the internet properly. To do this, we need to set `HTTP_PROXY` and `HTTPS_PROXY` as environmental variables in your local machine.
 
 Like the instructions linked above, you need to:  
 1. In Control Panel, type in **View advanced system settings**
 2. Click on **Environment Variables...**
 3. In the first "User variables" section, click on **New...**
-<img src="https://github.com/user-attachments/assets/1970bd03-5252-42df-b182-f292f5f5b6bf" style="width:600px;"/>
-
 4. Add HTTP_PROXY as:
 ```
 http://bcpxy.nycnet:8080
 ```
+It should look like this:
+
+<img src="https://github.com/user-attachments/assets/1970bd03-5252-42df-b182-f292f5f5b6bf" style="width:600px;"/>
+
 5. Add HTTPS_PROXY as:
 ```
 https://bcpxy.nycnet:8080
@@ -79,11 +81,11 @@ It should return the value you just set it as.
 ### 4. Test proxy with pip
 The following should work in the command prompt without any additional arguments (e.g. trusted host)
 ```
-python -m pip install prophet
+python -m pip install PACKAGE_NAME
 ```
 
 If it's not working, you can install with trusted host like the following:
 ```
-python -m pip install scikit-learn --trusted-host pypi.org --trusted-host files.pythonhosted.org 
+python -m pip install PACKAGE_NAME --trusted-host pypi.org --trusted-host files.pythonhosted.org 
 ```
 
