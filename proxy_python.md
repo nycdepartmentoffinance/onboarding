@@ -16,11 +16,11 @@ To verify if **Python** are properly installed and accessible from the command l
   where conda
   ```
 5. If nothing is returned, then you need to find out where the `python.exe` file is saved on your machine (assuming it is already installed). To do that, search `python.exe` and open the file location.
-![image](https://github.com/user-attachments/assets/2912c594-0c4b-41e6-b09c-db9cbcb36381)
+<img src="https://github.com/user-attachments/assets/2912c594-0c4b-41e6-b09c-db9cbcb36381" style="width:600px;"/>
 
-6. Once it opens the file location, go to the top and copy the folder that the executable is in. In my case it's: `C:\ProgramData\Anaconda3` 
+7. Once it opens the file location, go to the top and copy the folder that the executable is in. In my case it's: `C:\ProgramData\Anaconda3` 
 
-![image](https://github.com/user-attachments/assets/079f2557-c749-47c7-a49b-998e020ef29e)
+<img src="https://github.com/user-attachments/assets/079f2557-c749-47c7-a49b-998e020ef29e" style="width:600px;"/>
 
 7. If at this point there is no python.exe on your machine, reach out to the City Help Desk to have Anaconda installed. 
 8. Add the file path to python to your **PATH**, by following the instructions here:
