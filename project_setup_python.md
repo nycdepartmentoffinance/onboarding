@@ -1,10 +1,10 @@
-# Project set-up (in R/RStudio)
+# Project set-up (in python/VSCode)
 
 ## Create and clone github respository
 1. Create new repository in github organization
     - add `README.md`
     - Use Apache 2.0 License (consistent with Citywide Github Policy)
-    - add relevant `.gitignore` file for the relevant language (e.g. `R`)
+    - add relevant `.gitignore` file for the relevant language (e.g. `Python`)
 2. Clone this repository locally
     - use command prompt or a terminal in any IDE (e.g. RStudio, VSCode) to navigate to where you want the repository saved. In command prompt you could do the following:
       ```
@@ -13,15 +13,20 @@
     - go to your repository on github and copy the .git url (press green button Code and then under HTTPS press the copy button for the "Clone using the web URL")
     - use the following command to clone the repo with relevant proxy information (also in a terminal or command prompt)
       ```
-      git clone https://github.com/nycdepartmentoffinance/model_tc4.git -c "http.proxy=http://bcpxy.nycnet:8080" -c "https.proxy=https://bcpxy.nycnet:8080"
+      git clone https://github.com/nycdepartmentoffinance/onboarding.git -c "http.proxy=http://bcpxy.nycnet:8080" -c "https.proxy=https://bcpxy.nycnet:8080"
       ```
     - a pop-up will likely come up which will ask you to log in to github (using your user/password or a personal access token).
     - once you do that, the local clone should be complete!
 
 Now that the folder is set up with git, you can proceed to use it and all changes in the folder will be tracked. 
 
-## Add project files 
-If you are progreamming in R, you can create a new R project with the new folder you just created. In RStudio you can:
+
+## Open folder in VSCode
+
+If you are programming in python, you can use an Integrated Development Environment (IDE) of your choice to . 
+
+
+In RStudio you can:
 1. Select `New Project...`
 2. Indicate From Existing Directory
 3. Select the new directory you just made from the github repository from the `Browse` feature
