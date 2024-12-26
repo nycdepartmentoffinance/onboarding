@@ -2,7 +2,7 @@
 
 Once you have an R project up and running, you'll need to do a few things to make sure that your project is configured correctly to connect to the internet and can connect to our DOF databases correctly and securely.
 
-To make this easy, R projects load in two different files `.renviron` and `.rprofile` every time a new R session starts. We can use these files to configure our settings so that our session is always configured correctly.
+To make this easy, R projects load in two different files `.renviron` and `.rprofile` every time a new R session starts. We can use these files to configure our settings so that our session is always configured correctly and we don't need to customize requests to use the proxy everytime.
 
 ## .renviron
 To do this, first create an `.Renviron` file by doing the following in the terminal (not console):

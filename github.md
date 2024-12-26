@@ -6,6 +6,14 @@ Git is a tool (specifically a distributed version control system) that helps dev
 
 It's awesome.
 
+**What is the difference between git and GitHub?**
+
+In short, Git is a version control system that allows developers to track changes in their code, manage different versions, and collaborate on projects locally (as described above). GitHub is a cloud-based platform (website) that hosts Git repositories (folders), enabling collaboration among developers by providing tools for sharing code, managing projects, and tracking issues. While Git is used for version control on your local machine, GitHub offers remote repository hosting and additional collaboration features.
+
+Think about it like this: git is your personal assistant for a folder who is keeping track of when you 
+make changes and what versions of files are compatible with other versions. GitHub is the website where you can save 
+the folder (repository) and look back at earlier versions of the folder or other people's version of the folder.
+
 #### Downsides of git
 
 While Git is a powerful tool, there are some downsides to consider:
@@ -53,13 +61,10 @@ To interact with Git repositories locally, you'll need to install Git on your ma
 
 ***Note:*** You might encounter a few administrative errors during installation. Though you might see a few errors (namely that you do not have administrative privileges to write to certain folders), Git should install correctly without needing IT assistance. If you have any doubts or need help with the install, submit a ticket to [HelpDesk](https://cwitservice.nyc.gov/sp) to ask for them to install git locally.
 
-**What is the difference between git and GitHub?**
+To make sure that git is downloaded, you can check by opening a terminal in command prompt and typing `git`. You should see something like the below if things are working correctly:
 
-In short, Git is a version control system that allows developers to track changes in their code, manage different versions, and collaborate on projects locally (as described above). GitHub is a cloud-based platform (website) that hosts Git repositories (folders), enabling collaboration among developers by providing tools for sharing code, managing projects, and tracking issues. While Git is used for version control on your local machine, GitHub offers remote repository hosting and additional collaboration features.
+![image](https://github.com/user-attachments/assets/ba1bc394-efe8-41d4-9143-1bec13d38704)
 
-Think about it like this: git is your personal assistant for a folder who is keeping track of when you 
-make changes and what versions of files are compatible with other versions. GitHub is the website where you can save 
-the folder (repository) and look back at earlier versions of the folder or other people's version of the folder.
 
 #### 4. Setting Up Git to Work Through the Proxy
 
@@ -70,7 +75,13 @@ Good news - it's simple to configure the tools we need (git, R, python, etc.) to
 ##### Steps to Set Up Git with Proxy:
 
 1. Open your terminal or command prompt.
-2. Set the following Git configuration settings:
+2. First, look to see what your git configuration settings are with the following command:
+
+```{bash}
+git config --list
+```
+
+3. Set the following Git configuration settings, replacing the user.name and the user.email with the appropriate values:
 
 ```{bash}
 # replace with your name and email
@@ -80,12 +91,16 @@ git config --global http.sslbackend schannel
 git config --global http.proxy http://bcpxy.nycnet:8080
 git config --global https.proxy https://bcpxy.nycnet:8080
 ```
-Now that we added the configuration, we can try to clone a repository locally.
+4. Check to make sure the configuration settings were set correctly by calling the following command again:
 
+```{bash}
+git config --list --show-origin
+```
+You should see the settings you just changed at the bottom of the list, saved to a new .gitconfig file at the root of your user directory.
 
 #### 5. Cloning a Git Repository
 
-To clone a Git repository while connected to the proxy, follow these steps:
+Now that we added the configuration, we can try to clone a repository locally. To clone a Git repository while connected to the proxy, follow these steps:
 
 1. Navigate to the directory where you want the repository to be copied. For example, in the terminal within RStudio or 
 with the Command Prompt:
@@ -94,10 +109,20 @@ with the Command Prompt:
 cd /workspace_local
 ```
 
-2. Clone this repository using the following command:
+2. Clone this public repository (as a test) using the following command:
 
 ```{bash}
-git clone https://github.com/nycdepartmentoffinance/model_tc4.git -c "http.proxy=http://bcpxy.nycnet:8080" -c "https.proxy=https://bcpxy.nycnet:8080"
+git clone https://github.com/nycdepartmentoffinance/test.git
+```
+
+Note: if the repository is "public" then it will clone (copy) without needing to offer any other information. 
+
+For our purposes, most of the folders on GitHub will be set to private so only DOF employees have access. In these cases, we will need to do a couple additional steps to authenticate our machine using our github information. The easiest way to do this is to try to clone a private repository and then have git redirect you to a browser to sign in with your username and password.
+
+For an example of a private repository, try the following:
+
+```{bash}
+git clone https://github.com/nycdepartmentoffinance/onboarding.git
 ```
 
 3. Connect to github through your browser:
@@ -107,8 +132,9 @@ git clone https://github.com/nycdepartmentoffinance/model_tc4.git -c "http.proxy
     - Follow the on-screen instructions, including any additional confirmations or "OK" prompts.
     - Once signed in, the repository will be downloaded to your local directory.
 
+Done! 
 
-Done!
+Note: you'll need to do this sign in process every time you download (pull) or upload (push) content to github that is in a private repository.
 
 #### Learning how to use git
 
@@ -116,7 +142,7 @@ Now you can get started by putting git to the test! As you explore how to use gi
 feel free to refer back to these core resources that should have all you need to 
 implement the basic usages of git/GitHub.
 
-***Note:*** 99% of what we will do will be one of the following commands: `git status`, 
+***Note:*** 99% of what we will do will be one of the following commands: `git pull`, `git status`, 
 `git add .`, `git commit` and `git push`.
 
 - **What is Git? Why Should We Use It?**  
