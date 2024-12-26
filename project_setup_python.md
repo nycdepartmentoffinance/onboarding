@@ -23,14 +23,19 @@ Now that the folder is set up with git, you can proceed to use it and all change
 
 ## Open folder in VSCode
 
-If you are programming in python, you can use an Integrated Development Environment (IDE) of your choice to . 
+If you are programming in python, I find it easier to program in an Integrated Development Environment (IDE) -- basically a software that helps you keep track of your work in a much more user friendly way.
 
+The Microsoft IDE is called [VSCode](https://code.visualstudio.com/download) and is very similar to RStudio, Jupyter, or SAS Enterprise in that it has a place for you to write your code and a terminal or console where your code is being run and output is generated. The special benefit of VSCode is that it has a githib extension that helps you keep track of the versioning of your code as it changes.
 
-In RStudio you can:
-1. Select `New Project...`
+After downloading VSCode, the easiest way to start a project using the tool is to open an existing folder (or cloned repository) in VSCode by \:
+1. Under File, Select `Open Folder...`
 2. Indicate From Existing Directory
 3. Select the new directory you just made from the github repository from the `Browse` feature
 4. Press Create Project
+
+
+... start here where everything should be oriented towards VSCode not RStudio
+
 
 Now you are in an Rproj that is being tracked by git. 
 
