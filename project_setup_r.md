@@ -1,10 +1,10 @@
-# Project set-up
+# Project set-up (in R/RStudio)
 
 ## Create and clone github respository
 1. Create new repository in github organization
     - add `README.md`
     - Use Apache 2.0 License (consistent with Citywide Github Policy)
-    - add relevant `.gitignore` file for the relevant language (e.g. `R`, `Python`)
+    - add relevant `.gitignore` file for the relevant language (e.g. `R`)
 2. Clone this repository locally
     - use command prompt or a terminal in any IDE (e.g. RStudio, VSCode) to navigate to where you want the repository saved. In command prompt you could do the following:
       ```
@@ -21,7 +21,7 @@
 Now that the folder is set up with git, you can proceed to use it and all changes in the folder will be tracked. 
 
 ## Add project files 
-If you are working in R, you can create a new R project with the new folder you just created. In RStudio you can:
+If you are progreamming in R, you can create a new R project with the new folder you just created. In RStudio you can:
 1. Select `New Project...`
 2. Indicate From Existing Directory
 3. Select the new directory you just made from the github repository from the `Browse` feature
