@@ -5,11 +5,12 @@ Once you have an R project up and running, you'll need to do a few things to mak
 To make this easy, R projects load in two different files `.renviron` and `.rprofile` every time a new R session starts. We can use these files to configure our settings so that our session is always configured correctly and we don't need to customize requests to use the proxy everytime.
 
 ## .renviron
-To do this, first create an `.Renviron` file by doing the following in the terminal (not console):
+To do this, first create an `.Renviron` file by doing either of the following options: (A) using the user interface of RStudio by clicking "File", "New File", "R Script", and then saving the Untited file as ".Renviron" or (B) writing the following in the R console:
 ```
-touch .Renviron
+file.create(".Renviron")
 ```
-Then, open the file and copy and paste the following into it:
+
+Then, in the newly created `.Renviron` file, copy and paste the following into it:
 ```
 http_proxy = "bcpxy.nycnet:8080"
 http_proxy_user = user_id:password
@@ -122,11 +123,7 @@ rsconnect/
 
 ## .rprofile
 
-Next, we need to save some settings to the `.Rprofile` file in order to work properly on the DOF Windows machines. Create the `.Rprofile` file by doing the following (if it is not already created).
-
-```
-touch .Rprofile
-```
+Next, we need to save some settings to the `.Rprofile` file in order to work properly on the DOF Windows machines. Create the `.Rprofile` file by repeating the above instructions  with ".Rprofile" instead of ".Renviron".
 
 Open the file and add the following lines :
 ```
