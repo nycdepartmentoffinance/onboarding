@@ -1,6 +1,6 @@
-# Data Imports into R
+# Database Connections through R
 
-The property modeling team utilizes a range of databases and tools to store and analyze data.
+The DOF Property Modeling Team utilizes a range of databases and tools to store and analyze data.
 
 The diagram below gives a high-level overview of how these different data resources and tools are used together.
 
@@ -8,7 +8,7 @@ The diagram below gives a high-level overview of how these different data resour
 
 ## How can you access these data resources in R?
 
-There are currently two different ways to connect to the two different database connections through R.
+There are currently two different ways to connect to the two different database connections through R: connecting through Microsoft SQL Server (for the Production, Test, and Sandbox Databases) and using a custom database connection through assessNYC (FDW and PTS).
 
 ### Connecting with Microsoft SQL Server
 
@@ -103,8 +103,11 @@ incdata_query =
         ILA_Tot_Val as Tot_Val,
         ILF_BLDG_CAT as BCAT,
         ILF_Bldg_Sub_Cat as Subcat
-    From Real_Prop.INCOME_LF_APPROACH, Real_Prop.Income_LF
-    Where ILA_Type='R' And ILA_Year={prior_FY} and ilf_year={prior_FY} and ilf_pid=ila_pid
+    From 
+        Real_Prop.INCOME_LF_APPROACH, 
+        Real_Prop.Income_LF
+    Where ILA_Type='R' And ILA_Year={prior_FY} 
+        and ilf_year={prior_FY} and ilf_pid=ila_pid
     ")
 ```
 
@@ -157,7 +160,7 @@ The function works similarly to the one above in that it takes some information 
 
 To query the right database, we need to:
 
--    indicate the database (right now either "FDW" or "PTS"),
+-   indicate the database (right now either "FDW" or "PTS"),
 
 -   name the result of our dataframe as "tablename" (NOTE: this is not the actual name of the tables we are pulling from), and
 
@@ -178,9 +181,9 @@ realmast_top100_fdw = assessNYC::get_database_table(
      database='FDW',
      tablename='realmast_top100_fdw',
      query="
-    	Select *
-    	From S.vw_Cama_realmast(obs=100);
-    	",
+        Select *
+        From S.vw_Cama_realmast(obs=100);
+        ",
      # these two inputs are specific to my system. Make sure to change as needed
      sas_filepath='C:/Program Files/SASHome/SASFoundation/9.4/sas.exe',
      env_filepath='C:/Users/BoydClaire/workspace_local/.renviron'
@@ -189,15 +192,10 @@ realmast_top100_fdw = assessNYC::get_database_table(
 
 Let's check the results:
 
-```r
+``` r
 head(realmast_top100_fdw)
 ```
 
-Great! This looks very similar to our call to the test database. Now we can pretty much
-interchangeably get data into R from either database resource and analyze it as needed
-all in once place.
+Great! This looks very similar to our call to the test database. Now we can pretty much interchangeably get data into R from either database resource and analyze it as needed all in once place.
 
-Note: if the FDW call fails, look within the `tmp/` folder in your current working
-directory at the log for the given call. You should be able to debug it from there.
-
-
+Note: if the FDW call fails, look within the `tmp/` folder in your current working directory at the log for the given call. You should be able to debug it from there.
