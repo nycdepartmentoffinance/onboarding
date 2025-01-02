@@ -1,0 +1,523 @@
+1                                         The SAS System           15:33 Thursday, January 2, 2025
+
+NOTE: Copyright (c) 2016 by SAS Institute Inc., Cary, NC, USA. 
+NOTE: SAS (r) Proprietary Software 9.4 (TS1M6) 
+      Licensed to NEW YORK CITY DEPARTMENT OF FINANCE, Site 70008147.
+NOTE: This session is executing on the X64_10PRO  platform.
+
+
+
+NOTE: Analytical products:
+      
+      SAS/STAT 15.1
+      SAS/ETS 15.1
+      SAS/IML 15.1
+
+NOTE: Additional host information:
+
+ X64_10PRO WIN 10.0.19041  Workstation
+
+NOTE: SAS initialization used:
+      real time           2.37 seconds
+      cpu time            1.12 seconds
+      
+1          
+2          
+3          /* Specify the path to your .env file */
+4          /*%let env_file = %sysget(credentials_filepath);*/
+5          /*%include "&env_file.";*/
+6          
+7          %let env_file = %sysget(env_filepath);
+8          %let database = %sysget(database);
+9          
+10         /* Read the .env file line by line and save the relevant fields as macros */
+11         
+12         %put &database.;
+FDW
+13         
+14         
+15         %if &database.=FDW %then %do;
+16            data _null_;
+17               infile "&env_file" truncover;
+18               input line $200.;
+19         
+20               if index(line, 'fdw_username=') then call symputx('username', scan(line, 2, '='))
+20       ! ;
+21               if index(line, 'fdw_password=') then call symputx('password', scan(line, 2, '='))
+21       ! ;
+22               if index(line, 'fdw_path=') then call symputx('path', scan(line, 2, '='));
+23               if index(line, 'fdw_schema=') then call symputx('schema', scan(line, 2, '='));
+24            run;
+
+NOTE: The infile "C:/Users/BoydClaire/workspace_local/.renviron" is:
+      Filename=C:\Users\BoydClaire\workspace_local\.renviron,
+      RECFM=V,LRECL=32767,File Size (bytes)=1215,
+      Last Modified=05Dec2024:09:58:03,
+2                                         The SAS System           15:33 Thursday, January 2, 2025
+
+      Create Time=27Nov2024:15:24:52
+
+NOTE: 45 records were read from the infile "C:/Users/BoydClaire/workspace_local/.renviron".
+      The minimum record length was 0.
+      The maximum record length was 101.
+NOTE: DATA statement used (Total process time):
+      real time           0.02 seconds
+      cpu time            0.01 seconds
+      
+
+25         %end;
+26         
+27         %if &database.=PTS %then %do;
+28            data _null_;
+29               infile "&env_file" truncover;
+30               input line $200.;
+31         
+32               if index(line, 'pts_username=') then call symputx('username', scan(line, 2, '='))
+32       ! ;
+33               if index(line, 'pts_password=') then call symputx('password', scan(line, 2, '='))
+33       ! ;
+34               if index(line, 'pts_path=') then call symputx('path', scan(line, 2, '='));
+35               if index(line, 'pts_schema=') then call symputx('schema', scan(line, 2, '='));
+36            run;
+37         %end;
+38         
+39         LIBNAME S ORACLE  PATH=&path. USER=&username. PASSWORD =&password. schema = &schema.;
+NOTE: Libref S was successfully assigned as follows: 
+      Engine:        ORACLE 
+      Physical Name: DOFEDPRD
+40         
+41         options source2;
+42         
+43         /* import variables from command line */
+44         %let sql_filepath=%sysget(sql_filepath);
+45         %let tablename=%sysget(tablename);
+46         %let outfile=%sysget(outfile);
+47         
+48         /* run sql query and save as sas table,  */
+49         proc sql;
+50         	%include "&sql_filepath.";
+NOTE: %INCLUDE (level 1) file 
+      C:/Users/BoydClaire/workspace_local/onboarding/tmp/query_realmast.sql is file 
+      C:\Users\BoydClaire\workspace_local\onboarding\tmp\query_realmast.sql.
+51        +create table realmast as
+52        +    	Select *
+53        +    	From S.vw_Cama_realmast(obs=100);
+NOTE: Table WORK.REALMAST created, with 100 rows and 81 columns.
+
+54        +    	
+NOTE: %INCLUDE (level 1) ending.
+55         quit;
+NOTE: PROCEDURE SQL used (Total process time):
+3                                         The SAS System           15:33 Thursday, January 2, 2025
+
+      real time           0.19 seconds
+      cpu time            0.03 seconds
+      
+
+56         
+57         /* export to csv*/
+58         proc export
+59         	DATA= &tablename.
+60             OUTFILE= "&outfile."
+61             DBMS=CSV REPLACE;
+62             PUTNAMES=YES;
+63         run;
+
+64          /**********************************************************************
+65          *   PRODUCT:   SAS
+66          *   VERSION:   9.4
+67          *   CREATOR:   External File Interface
+68          *   DATE:      02JAN25
+69          *   DESC:      Generated SAS Datastep Code
+70          *   TEMPLATE SOURCE:  (None Specified.)
+71          ***********************************************************************/
+72             data _null_;
+73             %let _EFIERR_ = 0; /* set the ERROR detection macro variable */
+74             %let _EFIREC_ = 0;     /* clear export record count macro variable */
+75             file 'C:/Users/BoydClaire/workspace_local/onboarding/tmp/output_realmast.csv'
+75       ! delimiter=',' DSD DROPOVER lrecl=32767;
+76             if _n_ = 1 then        /* write column names or labels */
+77              do;
+78                put
+79                   "REM_MNC"
+80                ','
+81                   "REM_PID"
+82                ','
+83                   "REM_PIN"
+84                ','
+85                   "REM_OWN_NAME"
+86                ','
+87                   "REM_ACCT_NUM"
+88                ','
+89                   "REM_PRCL_LOCN"
+90                ','
+91                   "REM_PRCL_LOCN_STR_PFX"
+92                ','
+93                   "REM_PRCL_LOCN_STREET"
+94                ','
+95                   "REM_PRCL_LOCN_STR_SFX"
+96                ','
+97                   "REM_PRCL_LOCN_NUM"
+98                ','
+99                   "REM_PRCL_LOCN_NUM_CHAR"
+100               ','
+101                  "REM_PRCL_LOCN_CITY"
+102               ','
+4                                         The SAS System           15:33 Thursday, January 2, 2025
+
+103                  "REM_PRCL_LOCN_STT"
+104               ','
+105                  "REM_PRCL_LOCN_ZIP"
+106               ','
+107                  "REM_PRCL_LOCN_APT"
+108               ','
+109                  "REM_ALT_PRCL_ID"
+110               ','
+111                  "REM_PRCL_STATUS_DATE"
+112               ','
+113                  "REM_MBLU_MAP"
+114               ','
+115                  "REM_MBLU_MAP_CUT"
+116               ','
+117                  "REM_MBLU_BLOCK"
+118               ','
+119                  "REM_MBLU_BLOCK_CUT"
+120               ','
+121                  "REM_MBLU_LOT"
+122               ','
+123                  "REM_MBLU_LOT_CUT"
+124               ','
+125                  "REM_MBLU_UNIT"
+126               ','
+127                  "REM_MBLU_UNIT_CUT"
+128               ','
+129                  "REM_STATUS_DATE"
+130               ','
+131                  "REM_INTRNL_NOTE"
+132               ','
+133                  "REM_CARD_QUEUE"
+134               ','
+135                  "REM_GROWTH"
+136               ','
+137                  "REM_CHANGED_BY"
+138               ','
+139                  "REM_GIS_ID"
+140               ','
+141                  "REM_INET_SUPPRESS"
+142               ','
+143                  "REM_TEMP_PID"
+144               ','
+145                  "REM_IS_CONDO_MAIN"
+146               ','
+147                  "REM_CMPLX_NAME"
+148               ','
+149                  "REM_PROCESS"
+150               ','
+151                  "REM_STREET_IDX"
+152               ','
+153                  "REM_OWN_IDX"
+154               ','
+155                  "REM_ACCT_IDX"
+5                                         The SAS System           15:33 Thursday, January 2, 2025
+
+156               ','
+157                  "REM_KEY"
+158               ','
+159                  "REM_BLDG_NAME"
+160               ','
+161                  "REM_ASSOC_PARCEL_ID"
+162               ','
+163                  "REM_ASSOC_PCT"
+164               ','
+165                  "REM_CMPLX_NUM"
+166               ','
+167                  "REM_USE_CODE"
+168               ','
+169                  "REM_USE_TYPE"
+170               ','
+171                  "REM_LEGAL_AREA"
+172               ','
+173                  "REM_PRCL_ID"
+174               ','
+175                  "REM_INTRNL_SUPPRESS"
+176               ','
+177                  "REM_ENTITY"
+178               ','
+179                  "REM_IS_SKELETAL"
+180               ','
+181                  "REM_CROSS_STREET_1"
+182               ','
+183                  "REM_CROSS_STREET_2"
+184               ','
+185                  "REM_PRCL_LOCN_NUM_HIGH"
+186               ','
+187                  "REM_PRCL_LOCN_NUM_CHAR_HIGH"
+188               ','
+189                  "REM_BLDG_CLASS"
+190               ','
+191                  "REM_BLDG_CLASS_DESC"
+192               ','
+193                  "REM_ST_CODE"
+194               ','
+195                  "REM_IS_SUB_MAIN"
+196               ','
+197                  "REM_PARCEL_STATUS"
+198               ','
+199                  "REM_MBLU_MAP_DESC"
+200               ','
+201                  "REM_BLOCK_SUFFIX"
+202               ','
+203                  "REM_FIELD_REVIEW"
+204               ','
+205                  "REM_PRCL_LOCN_ADDRESS_ID"
+206               ','
+207                  "REM_PRCL_LOCN_APT_TYPE"
+208               ','
+6                                         The SAS System           15:33 Thursday, January 2, 2025
+
+209                  "REM_PRCL_LOCN_COUNTRY"
+210               ','
+211                  "REM_PRCL_LOCN_COUNTY"
+212               ','
+213                  "REM_PRCL_LOCN_POST_DIRECTION"
+214               ','
+215                  "REM_PRCL_LOCN_PRE_DIRECTION"
+216               ','
+217                  "REM_PRCL_LOCN_STREET_TYPE"
+218               ','
+219                  "REM_SUBMNC"
+220               ','
+221                  "REM_TAX_ID"
+222               ','
+223                  "REM_USER_ID"
+224               ','
+225                  "REM_USRFLD"
+226               ','
+227                  "REM_USRFLD_DESC"
+228               ','
+229                  "REM_ACCESS_DATE"
+230               ','
+231                  "REM_CREATE_STAMP"
+232               ','
+233                  "REM_CREATE_DATE"
+234               ','
+235                  "REM_LAST_UPDATE"
+236               ','
+237                  "REM_PROPERTY_TYPE"
+238               ','
+239                  "REM_PROPERTY_TYPE_DESC"
+240               ;
+241             end;
+242           set  REALMAST   end=EFIEOD;
+243               format REM_MNC 10. ;
+244               format REM_PID 10. ;
+245               format REM_PIN $35. ;
+246               format REM_OWN_NAME $85. ;
+247               format REM_ACCT_NUM $30. ;
+248               format REM_PRCL_LOCN $50. ;
+249               format REM_PRCL_LOCN_STR_PFX $5. ;
+250               format REM_PRCL_LOCN_STREET $40. ;
+251               format REM_PRCL_LOCN_STR_SFX $5. ;
+252               format REM_PRCL_LOCN_NUM 10. ;
+253               format REM_PRCL_LOCN_NUM_CHAR $15. ;
+254               format REM_PRCL_LOCN_CITY $18. ;
+255               format REM_PRCL_LOCN_STT $2. ;
+256               format REM_PRCL_LOCN_ZIP $12. ;
+257               format REM_PRCL_LOCN_APT $12. ;
+258               format REM_ALT_PRCL_ID $35. ;
+259               format REM_PRCL_STATUS_DATE datetime20. ;
+260               format REM_MBLU_MAP $7. ;
+261               format REM_MBLU_MAP_CUT $3. ;
+7                                         The SAS System           15:33 Thursday, January 2, 2025
+
+262               format REM_MBLU_BLOCK $7. ;
+263               format REM_MBLU_BLOCK_CUT $3. ;
+264               format REM_MBLU_LOT $7. ;
+265               format REM_MBLU_LOT_CUT $3. ;
+266               format REM_MBLU_UNIT $7. ;
+267               format REM_MBLU_UNIT_CUT $3. ;
+268               format REM_STATUS_DATE datetime20. ;
+269               format REM_INTRNL_NOTE $30. ;
+270               format REM_CARD_QUEUE $12. ;
+271               format REM_GROWTH 10. ;
+272               format REM_CHANGED_BY $30. ;
+273               format REM_GIS_ID $30. ;
+274               format REM_INET_SUPPRESS 10. ;
+275               format REM_TEMP_PID 10. ;
+276               format REM_IS_CONDO_MAIN 2. ;
+277               format REM_CMPLX_NAME $40. ;
+278               format REM_PROCESS $12. ;
+279               format REM_STREET_IDX $1. ;
+280               format REM_OWN_IDX $1. ;
+281               format REM_ACCT_IDX $2. ;
+282               format REM_KEY $25. ;
+283               format REM_BLDG_NAME $60. ;
+284               format REM_ASSOC_PARCEL_ID $30. ;
+285               format REM_ASSOC_PCT 9.2 ;
+286               format REM_CMPLX_NUM $35. ;
+287               format REM_USE_CODE $6. ;
+288               format REM_USE_TYPE $4. ;
+289               format REM_LEGAL_AREA 21.4 ;
+290               format REM_PRCL_ID $20. ;
+291               format REM_INTRNL_SUPPRESS 10. ;
+292               format REM_ENTITY $3. ;
+293               format REM_IS_SKELETAL 2. ;
+294               format REM_CROSS_STREET_1 $25. ;
+295               format REM_CROSS_STREET_2 $25. ;
+296               format REM_PRCL_LOCN_NUM_HIGH 10. ;
+297               format REM_PRCL_LOCN_NUM_CHAR_HIGH $15. ;
+298               format REM_BLDG_CLASS $6. ;
+299               format REM_BLDG_CLASS_DESC $40. ;
+300               format REM_ST_CODE 12. ;
+301               format REM_IS_SUB_MAIN 2. ;
+302               format REM_PARCEL_STATUS $1. ;
+303               format REM_MBLU_MAP_DESC $40. ;
+304               format REM_BLOCK_SUFFIX $6. ;
+305               format REM_FIELD_REVIEW 2. ;
+306               format REM_PRCL_LOCN_ADDRESS_ID $100. ;
+307               format REM_PRCL_LOCN_APT_TYPE $25. ;
+308               format REM_PRCL_LOCN_COUNTRY $50. ;
+309               format REM_PRCL_LOCN_COUNTY $50. ;
+310               format REM_PRCL_LOCN_POST_DIRECTION $3. ;
+311               format REM_PRCL_LOCN_PRE_DIRECTION $3. ;
+312               format REM_PRCL_LOCN_STREET_TYPE $10. ;
+313               format REM_SUBMNC 10. ;
+314               format REM_TAX_ID $20. ;
+8                                         The SAS System           15:33 Thursday, January 2, 2025
+
+315               format REM_USER_ID $30. ;
+316               format REM_USRFLD $6. ;
+317               format REM_USRFLD_DESC $40. ;
+318               format REM_ACCESS_DATE datetime20. ;
+319               format REM_CREATE_STAMP 19. ;
+320               format REM_CREATE_DATE datetime20. ;
+321               format REM_LAST_UPDATE datetime20. ;
+322               format REM_PROPERTY_TYPE $6. ;
+323               format REM_PROPERTY_TYPE_DESC $40. ;
+324             do;
+325               EFIOUT + 1;
+326               put REM_MNC @;
+327               put REM_PID @;
+328               put REM_PIN $ @;
+329               put REM_OWN_NAME $ @;
+330               put REM_ACCT_NUM $ @;
+331               put REM_PRCL_LOCN $ @;
+332               put REM_PRCL_LOCN_STR_PFX $ @;
+333               put REM_PRCL_LOCN_STREET $ @;
+334               put REM_PRCL_LOCN_STR_SFX $ @;
+335               put REM_PRCL_LOCN_NUM @;
+336               put REM_PRCL_LOCN_NUM_CHAR $ @;
+337               put REM_PRCL_LOCN_CITY $ @;
+338               put REM_PRCL_LOCN_STT $ @;
+339               put REM_PRCL_LOCN_ZIP $ @;
+340               put REM_PRCL_LOCN_APT $ @;
+341               put REM_ALT_PRCL_ID $ @;
+342               put REM_PRCL_STATUS_DATE @;
+343               put REM_MBLU_MAP $ @;
+344               put REM_MBLU_MAP_CUT $ @;
+345               put REM_MBLU_BLOCK $ @;
+346               put REM_MBLU_BLOCK_CUT $ @;
+347               put REM_MBLU_LOT $ @;
+348               put REM_MBLU_LOT_CUT $ @;
+349               put REM_MBLU_UNIT $ @;
+350               put REM_MBLU_UNIT_CUT $ @;
+351               put REM_STATUS_DATE @;
+352               put REM_INTRNL_NOTE $ @;
+353               put REM_CARD_QUEUE $ @;
+354               put REM_GROWTH @;
+355               put REM_CHANGED_BY $ @;
+356               put REM_GIS_ID $ @;
+357               put REM_INET_SUPPRESS @;
+358               put REM_TEMP_PID @;
+359               put REM_IS_CONDO_MAIN @;
+360               put REM_CMPLX_NAME $ @;
+361               put REM_PROCESS $ @;
+362               put REM_STREET_IDX $ @;
+363               put REM_OWN_IDX $ @;
+364               put REM_ACCT_IDX $ @;
+365               put REM_KEY $ @;
+366               put REM_BLDG_NAME $ @;
+367               put REM_ASSOC_PARCEL_ID $ @;
+9                                         The SAS System           15:33 Thursday, January 2, 2025
+
+368               put REM_ASSOC_PCT @;
+369               put REM_CMPLX_NUM $ @;
+370               put REM_USE_CODE $ @;
+371               put REM_USE_TYPE $ @;
+372               put REM_LEGAL_AREA @;
+373               put REM_PRCL_ID $ @;
+374               put REM_INTRNL_SUPPRESS @;
+375               put REM_ENTITY $ @;
+376               put REM_IS_SKELETAL @;
+377               put REM_CROSS_STREET_1 $ @;
+378               put REM_CROSS_STREET_2 $ @;
+379               put REM_PRCL_LOCN_NUM_HIGH @;
+380               put REM_PRCL_LOCN_NUM_CHAR_HIGH $ @;
+381               put REM_BLDG_CLASS $ @;
+382               put REM_BLDG_CLASS_DESC $ @;
+383               put REM_ST_CODE @;
+384               put REM_IS_SUB_MAIN @;
+385               put REM_PARCEL_STATUS $ @;
+386               put REM_MBLU_MAP_DESC $ @;
+387               put REM_BLOCK_SUFFIX $ @;
+388               put REM_FIELD_REVIEW @;
+389               put REM_PRCL_LOCN_ADDRESS_ID $ @;
+390               put REM_PRCL_LOCN_APT_TYPE $ @;
+391               put REM_PRCL_LOCN_COUNTRY $ @;
+392               put REM_PRCL_LOCN_COUNTY $ @;
+393               put REM_PRCL_LOCN_POST_DIRECTION $ @;
+394               put REM_PRCL_LOCN_PRE_DIRECTION $ @;
+395               put REM_PRCL_LOCN_STREET_TYPE $ @;
+396               put REM_SUBMNC @;
+397               put REM_TAX_ID $ @;
+398               put REM_USER_ID $ @;
+399               put REM_USRFLD $ @;
+400               put REM_USRFLD_DESC $ @;
+401               put REM_ACCESS_DATE @;
+402               put REM_CREATE_STAMP @;
+403               put REM_CREATE_DATE @;
+404               put REM_LAST_UPDATE @;
+405               put REM_PROPERTY_TYPE $ @;
+406               put REM_PROPERTY_TYPE_DESC $ ;
+407               ;
+408             end;
+409            if _ERROR_ then call symputx('_EFIERR_',1);  /* set ERROR detection macro variable
+409      ! */
+410            if EFIEOD then call symputx('_EFIREC_',EFIOUT);
+411            run;
+
+NOTE: The file 'C:/Users/BoydClaire/workspace_local/onboarding/tmp/output_realmast.csv' is:
+      Filename=C:\Users\BoydClaire\workspace_local\onboarding\tmp\output_realmast.csv,
+      RECFM=V,LRECL=32767,File Size (bytes)=0,
+      Last Modified=02Jan2025:15:33:08,
+      Create Time=02Jan2025:15:32:21
+
+NOTE: 101 records were written to the file 
+10                                        The SAS System           15:33 Thursday, January 2, 2025
+
+      'C:/Users/BoydClaire/workspace_local/onboarding/tmp/output_realmast.csv'.
+      The minimum record length was 259.
+      The maximum record length was 1338.
+NOTE: There were 100 observations read from the data set WORK.REALMAST.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+      
+
+100 records created in C:/Users/BoydClaire/workspace_local/onboarding/tmp/output_realmast.csv 
+from REALMAST.
+  
+  
+NOTE: "C:/Users/BoydClaire/workspace_local/onboarding/tmp/output_realmast.csv" file was 
+      successfully created.
+NOTE: PROCEDURE EXPORT used (Total process time):
+      real time           0.20 seconds
+      cpu time            0.12 seconds
+      
+
+
+NOTE: SAS Institute Inc., SAS Campus Drive, Cary, NC USA 27513-2414
+NOTE: The SAS System used:
+      real time           3.59 seconds
+      cpu time            1.84 seconds
+      
