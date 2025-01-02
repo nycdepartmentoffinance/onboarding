@@ -8,11 +8,11 @@ The diagram below gives a high-level overview of how these different data resour
 
 ## How can you access these data resources in R?
 
-There are currently two different ways to connect to the two different database connections through R: connecting through Microsoft SQL Server (for the Production, Test, and Sandbox Databases) and using a custom database connection through assessNYC (FDW and PTS).
+There are currently two different ways to connect to our databases through R: creating a Microsoft SQL Server database connection (for the Production, Test, and Sandbox Databases) and using a custom database connection through our custom package assessNYC (for Financial Data Warehouse and Property Tax System).
 
 ### Connecting with Microsoft SQL Server
 
-We can connect through Microsoft SQL Server directly through existing R packages that form a database connection with our credentials, and can query the Production, Test, and Sandbox databases through that approach.
+We can establish a direct connection to Microsoft SQL Server using existing R packages, which link to the database using our credentials, allowing us to query the Production, Test, and Sandbox databases.
 
 To do this, you first need to import two R packages locally: `DBI` and `odbc`. Note: you only need to do this once.
 
@@ -22,9 +22,7 @@ install.packages("DBI")
 install.packages("odbc")
 ```
 
-After these two packages are installed successfully, you can form a database connection with credentials of either the production, test or sandbox databases.
-
-For this demonstration, I'll query the test database, so first I'll save those credentials locally.
+Once these two packages are installed, you can establish a database connection using the credentials for either the production, test, or sandbox databases. For this demonstration, I'll query the test database, so first I'll save those credentials locally.
 
 ``` r
 #replace the following with the real credentials
@@ -52,17 +50,15 @@ con <- DBI::dbConnect(odbc::odbc(),
                       Port     = 1433)
 ```
 
-Once your connection is made in RStudio, you can explore the tables and schemas in the "Connections" tab on the right hand side of your screen, next to "Environment". This mimics the same functionality in SQL Server.
+After establishing your connection in RStudio, you can browse the tables and schemas in the "Connections" tab on the right side of your screen, next to the "Environment" tab. This provides the same functionality as SQL Server.
 
-Now that we have established the database connection, we can start to build our queries.
-
-Let's start with a very simple one.
+With the database connection in place, we can begin constructing our queries. Let's start with a basic one.
 
 ``` r
 query="SELECT TOP 100 * FROM REAL_PROP.REALMAST"
 ```
 
-Now that we have a query saved as a string, we can use it to actually query our database as save the result as a dataframe within our local environment in R. We have to use the dbGetQuery() function, passing in the database connection and the string of the query we want to run.
+Now that we have saved the query as a string, we can use it to query the database and store the result as a dataframe in our local R environment. To do this, we need to use the `dbGetQuery()` function, providing the database connection and the query string we wish to execute.
 
 ``` r
 realmast_top100 <- DBI::dbGetQuery(
@@ -156,17 +152,17 @@ Once installed, you can explore some of the documentation of this function:
 ?assessNYC::get_database_table()
 ```
 
-The function works similarly to the one above in that it takes some information to build the correct query as well as information to create the right kind of database connection.
+The function works similarly to the previous one, taking parameters to build the correct query and establish the appropriate database connection.
 
-To query the right database, we need to:
+To query the right database, you need to:
 
--   indicate the database (right now either "FDW" or "PTS"),
+-   indicate the database (either "FDW" or "PTS"),
 
 -   name the result of our dataframe as "tablename" (NOTE: this is not the actual name of the tables we are pulling from), and
 
--   pass it a query string (just like above).
+-   pass it a query string (just like in the previous example).
 
-In this case, the database connection is made in SAS so you need to pass in two different parameters: -
+Since the database connection is made in SAS, two additional parameters are required:
 
 -   `sas_filepath`: file path to your SAS executable (`sas.exe`)
 
@@ -198,4 +194,4 @@ head(realmast_top100_fdw)
 
 Great! This looks very similar to our call to the test database. Now we can pretty much interchangeably get data into R from either database resource and analyze it as needed all in once place.
 
-Note: if the FDW call fails, look within the `tmp/` folder in your current working directory at the log for the given call. You should be able to debug it from there.
+**Note:** if the FDW call fails, look within the `tmp/` folder in your current working directory at the log for the given call. You should be able to debug it from there.

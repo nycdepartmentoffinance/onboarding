@@ -10,6 +10,7 @@ Depending on which language you prefer to program in, here are some guides on ho
 * R
     * [Project Set-up in R](project_setup_r.md)
     * [Proxy Set-up in R](proxy_R.md)
+    * [Database Connections through R](database_connections_R.md)
 * python
     * [Proxy Set-up in Python](proxy_python.md)
     * [Project Set-up in Python](project_setup_python.md)
