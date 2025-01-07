@@ -22,7 +22,7 @@ install.packages("DBI")
 install.packages("odbc")
 ```
 
-Once these two packages are installed, you can establish a database connection using the credentials for either the production, test, or sandbox databases. For this demonstration, I'll query the test database, so first I'll save those credentials locally.
+Once these two packages are installed, you can establish a database connection using the credentials for either the production, test, or sandbox databases. For this demonstration, I'll query the test database, so first I'll save those credentials locally to my `.Renviron` file.
 
 ``` r
 #replace the following with the real credentials
@@ -30,6 +30,12 @@ test_server="XXX.XXX.XX.XXX"
 test_database='V8_XXXXXXXXXXXXXXXXXXX'
 test_username="XXXXX"
 test_password="XXXXX"
+```
+
+After starting a new R session. I can make sure that those credentials are being read in as environmental variables by doing the following:
+
+```
+Sys.getenv("test_server")
 ```
 
 Next, I'll use the DBI and odbc packages to create a connection to the Microsoft SQL Server database as follows:
@@ -42,10 +48,10 @@ library(odbc)
 # create database connection
 con <- DBI::dbConnect(odbc::odbc(),
                       Driver   = "SQL Server",
-                      Server   = test_server,
-                      Database = test_database,
-                      UID      = test_username,
-                      PWD      = test_password,
+                      Server   = Sys.getenv("test_server"),
+                      Database = Sys.getenv("test_database"),
+                      UID      = Sys.getenv("test_username"),
+                      PWD      = Sys.getenv("test_password"),
                       TrustServerCertificate="yes",
                       Port     = 1433)
 ```
