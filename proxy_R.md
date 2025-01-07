@@ -81,7 +81,7 @@ Sys.getenv("fdw_username")
 This file should not be added to your any github repository. It should stay as a local file that only you should have access to. 
 
 
-## .rprofile
+## Creating an `.rprofile` file
 
 Next, we need to save some settings to the `.Rprofile` file in order to work properly on the DOF Windows machines. 
 
@@ -96,6 +96,8 @@ Open the file and add the following lines :
 options(timeout=1000)
 options(download.file.method = "wininet")
 ```
+
+## Fone! 
 
 Now, every time you start an R Session, your settings from both of these files should be automatically pulled into your environment.
 
