@@ -97,7 +97,7 @@ options(timeout=1000)
 options(download.file.method = "wininet")
 ```
 
-## Fone! 
+## Done! 
 
 Now, every time you start an R Session, your settings from both of these files should be automatically pulled into your environment.
 
