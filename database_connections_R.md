@@ -184,7 +184,6 @@ Sys.getenv("pts_schema")
 Using these credentials, we can use the same packages to create a connection to the Oracle database.
 
 ```{r}
-
 #select database I want to read in data from
 database = "fdw"
 database_schema = toupper(Sys.getenv(paste0(database, "_schema")))
