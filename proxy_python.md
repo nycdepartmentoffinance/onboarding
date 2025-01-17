@@ -24,7 +24,10 @@ To verify if **Python** are properly installed and accessible from the command l
 
 7. If at this point there is no python.exe on your machine, reach out to the City Help Desk to have Anaconda installed. 
 8. Add the file path to python to your **PATH**, by following the instructions here:
-[How to add Conda to PATH](https://stackoverflow.com/questions/44515769/conda-is-not-recognized-as-internal-or-external-command).
+[How to add Conda to PATH](https://stackoverflow.com/questions/44515769/conda-is-not-recognized-as-internal-or-external-command). **Note:** Before the last step of the stack overflow instructions, enter the following:
+```
+config --set ssl_verify false
+```
 
 ### 2. Test to make sure that python is working correctly from Command Prompt
 In a new session of command prompt, type the following:
