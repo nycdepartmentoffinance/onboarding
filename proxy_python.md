@@ -5,7 +5,7 @@ Before proceeding with proxy set-up, ensure that **Python** is installed on your
 ### 1. Make sure Python is installed and added to your PATH
 
 To verify if **Python** are properly installed and accessible from the command line, follow these steps:
-1. Open the **Command Line**.
+1. Open the **Command Prompt**.
 2. Type the following command and press **Enter**:
   ```
   python --version
