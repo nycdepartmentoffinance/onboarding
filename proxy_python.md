@@ -126,7 +126,8 @@ cpg-config.ps1 http://bcpxy.nycnet:8080 pip
 
 
 ### 5. Test proxy with pip
-The following should work in the command prompt without any additional arguments (e.g. trusted host)
+
+Now we can test the proxy configuration by trying to download a package using pip. The following should work in a command prompt terminal without any additional arguments (e.g. trusted host)
 ```
 python -m pip install PACKAGE_NAME
 ```
