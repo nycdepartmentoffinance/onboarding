@@ -11,7 +11,7 @@ It's awesome.
 In short, git is a very simple command line language while GitHub is a website that hosts repositories (folders) under version control by Git, enabling collaboration among developers by providing tools for sharing code, managing projects, and tracking issues. While Git is used for version control on your local machine, GitHub offers remote repository hosting and additional collaboration features.
 
 Think about it like this: git is your personal assistant for a folder who is keeping track of when you 
-make changes and what versions of files are compatible with other versions. GitHub is the website where you can save 
+make changes and what versions of files are compatible with other versions. GitHub is the lunch room where everyone's assistants talk to each other and decide the best path forward; it's a website where you can save 
 the folder (repository) and look back at earlier versions of the folder or other people's version of the folder.
 
 #### Downsides of git
