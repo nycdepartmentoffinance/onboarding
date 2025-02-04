@@ -26,7 +26,7 @@ That said, there are a ton of advantages to using git that outweigh these cons! 
 
 #### City policy on using Git/GitHub
 
-Before proceeding with the GitHub setup, please take a look at the official [Citywide GitHub Policy](resources/Citywide-GitHub-Policy.pdf) to ensure you understand the guidelines for using GitHub within the NYC Department of Finance (DOF). It contains a helpful overview of what:
+Before proceeding with the GitHub setup, please take a look at the official [Citywide GitHub Policy](https://github.com/nycdepartmentoffinance/onboarding/blob/b9ab8ef51d05067ec7894c0086f4ae7fef8ae9cb/resources/Citywide-GitHub-Policy.pdf) to ensure you understand the guidelines for using GitHub within the NYC Department of Finance (DOF). It contains a helpful overview of what:
 
 * what github is useful for
 * definitions of key terms (repository, accounts, permissions)
