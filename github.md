@@ -112,7 +112,7 @@ cd /workspace_local
 2. Clone this public repository (as a test) using the following command:
 
 ```{bash}
-git clone https://github.com/nycdepartmentoffinance/test.git
+git clone https://github.com/nycdepartmentoffinance/nycdepartmentoffinance.github.io.git
 ```
 
 Note: if the repository is "public" then it will clone (copy) without needing to offer any other information. 
