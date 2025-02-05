@@ -1,9 +1,3 @@
----
-editor_options: 
-  markdown: 
-    wrap: 72
----
-
 # Project set-up (in R/RStudio)
 
 ## Create and clone github respository
