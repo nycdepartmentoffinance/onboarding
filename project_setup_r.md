@@ -16,6 +16,13 @@
         cd C:/Users/BoydClaire/workspace_local
         ```
 
+        **Note:** if you want to work in one of the DOF shared drives (e.g. G or H) then you can use the /d command in the terminal to switch accordingly. For example, if you wanted to clone the repo into a folder called workspace in your H drive, you could do the following to navigate to that directory:
+ 
+        ```         
+        cd /d H:/workspace
+        ```
+
+
     -   go to your repository on github and copy the .git url (press
         green button Code and then under HTTPS press the copy button for
         the "Clone using the web URL")
