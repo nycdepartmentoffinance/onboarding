@@ -124,7 +124,7 @@ proxy_servers:
   https: bcpxy.nycnet:8080
 ```
 
-After this is complete, run the following to activate poetry for your project in the terminal:
+After this is complete, run the following to activate a conda environment for your project in the terminal:
 ```
 conda create --name YOUR_ENV_NAME
 ```
