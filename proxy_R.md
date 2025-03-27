@@ -37,19 +37,21 @@ https_proxy = bcpxy.nycnet:8080
 #github info
 GITHUB_PAT=###############
 
-# SAS database connections
+# Oracle database connections
+# need quotes
 
-fdw_username=###############
-fdw_password=###############
-fdw_path=###############
-fdw_schema=###############
+fdw_username='###############'
+fdw_password='###############'
+fdw_path='###############'
+fdw_schema='###############'
 
-pts_username=###############
-pts_password=###############
-pts_path=###############
-pts_schema=###############
+pts_username='###############'
+pts_password='###############'
+pts_path='###############'
+pts_schema='###############'
 
 # SQL Server database connections
+# do not need quotes
 
 test_server=###############
 test_database=####################
