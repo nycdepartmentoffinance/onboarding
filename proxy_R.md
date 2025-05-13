@@ -108,3 +108,15 @@ If you are still having trouble reading in environmental variables from your `.R
 readRenviron("C:/Users/BoydClaire/.Renviron")
 ```
 
+## Common Error Messages
+
+Sometimes different machines need additional steps to make sure the set up is successful. For example, sometimes you can get this error:
+
+![image](https://github.com/user-attachments/assets/15058647-b998-4316-b0fa-2d147e7c798f)
+
+If so, you need to take the extra step to disable secure downloads for HTTP. To do that in RStudio, go Tools > Global Options... > Packages, and then uncheck the boxes that say `Use secure download method for HTTP`, like the below:
+
+![image](https://github.com/user-attachments/assets/004fe914-5daa-4db9-9167-6dbdb65e68b7)
+
+
+
