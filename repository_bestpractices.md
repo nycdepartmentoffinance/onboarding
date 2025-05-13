@@ -15,7 +15,6 @@ To ensure a smooth and consistent process for adding repositories to our GitHub 
      - A clear **README.md** file explaining the project, its purpose, and how to use it.
      - A **LICENSE** file if the project is meant to be open-source or publicly shared.
      - A **.gitignore** file tailored for the project's needs. This will likely contain .env or .renviron files.
-   - Follow the standard **directory structure** for your programming language (e.g., `src/`, `docs/`, `tests/`).
 
 ## 4. **Documentation**
    - Maintain **up-to-date documentation** in the repository, especially for complex projects. This includes installation instructions, usage examples, and API documentation.
