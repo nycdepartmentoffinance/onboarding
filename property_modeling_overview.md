@@ -1,6 +1,6 @@
 # Property Modeling Overview
 
-The property modeling and valuation team at DOF is responsible for modeling the property value of all \~1M residential and commercial properties in the city every year in order to tax the property owners equitably, as property taxes raise \~40% of the city's annual budget .
+The Property Modeling and Valuation team at DOF is responsible for modeling the property value of all \~1M residential and commercial properties in the city every year in order to tax the property owners equitably, as property taxes raise \~40% of the city's annual budget .
 
 ### Introductory Resources
 
