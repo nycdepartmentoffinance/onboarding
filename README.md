@@ -1,7 +1,10 @@
 # Onboarding
 
-A few guides to get you started:
+Welcome to Property Modeling & Valuation at DOF!
 
+Here are few guides to get you started:
+
+* [Property Modeling Overview](property_modeling_overview.md)
 * [Github Set-up](github.md)
 * [Repository Best Practices](repository_bestpractices.md)
 
