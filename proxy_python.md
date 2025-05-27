@@ -72,7 +72,7 @@ quit()
 
 ### 3. Set HTTP_PROXY and HTTPS_PROXY as environmental variables in your local machine
 
-Now that python is successfully set up, we can configure our proxy settings in order to connect to the internet properly. To do this, we need to set `HTTP_PROXY` and `HTTPS_PROXY` as environmental variables in your local machine.
+Now that python is successfully set up, we can configure our proxy settings in order to connect to the internet properly. To do this, we need to set `HTTP_PROXY` and `HTTPS_PROXY` as environmental variables in your local machine. Ask Claire or another DOF team member for the hostname and port for our proxy.
 
 Like the instructions linked above, you need to:  
 1. In Control Panel, type in **View advanced system settings**
@@ -80,7 +80,7 @@ Like the instructions linked above, you need to:
 3. In the first "User variables" section, click on **New...**
 4. Add HTTP_PROXY as:
 ```
-http://bcpxy.nycnet:8080
+http://[hostname]:[port]
 ```
 It should look like this:
 
@@ -88,7 +88,7 @@ It should look like this:
 
 5. Add HTTPS_PROXY as:
 ```
-https://bcpxy.nycnet:8080
+https://[hostname]:[port]
 ```
 
 It should look like the following after you add the variables:
@@ -118,7 +118,7 @@ Let's say we have pip installed, and want to proceed with setting up the proxy w
 1. Download the raw file (download icon) for [this powershell script](https://github.com/nycdepartmentoffinance/conda-git-pip-proxy/blob/master/cpg-config.ps1) and save it to your home directory. It basically sets the proxy settings for conda, pip and git all at once or can set them individually by passing in an optional argument specifying which ones to set up. 
 2. In a powershell terminal, type the filepath of the file, the name of the proxy, and then the program you want to configure. If you do not include the last argument, it will configure conda, git and pip all at once. This is super valuable if you already have all three installed and ready to go. For me, it was:
 ```
-cpg-config.ps1 http://bcpxy.nycnet:8080 pip 
+cpg-config.ps1 http://[hostname]:[port] pip 
 ```
 3. If it ran successfully, it should look something like this:
 
