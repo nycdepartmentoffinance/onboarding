@@ -70,6 +70,8 @@ To summarize, this is a general sense of each of the tools we use:
 
 -   [Property Modeling SharePoint Site](https://nyco365.sharepoint.com/sites/DOF-PropertyDivision/ProjectModelling/SitePages/Home.aspx)
 
--   [Property Guide]: This guide includes detailed notes about how specific types of properties are valued, decodes for some of our data, etc. This is written primarily for Tax Assessors who are valuing property individually, so it’s not all relevant for us, but it’s a good overview of the when/how/what of valuation here. This is available on the G drive: G:\Property_ORGPROJ\Orgproj\ModelingXIII\onboarding materials
-
 -   [Digital Tax Map](http://gis.nyc.gov/taxmap/map.htm)
+
+-   Property Guide: This guide includes detailed notes about how specific types of properties are valued, decodes for some of our data, etc. This is written primarily for Tax Assessors who are valuing property individually, so it’s not all relevant for us, but it’s a good overview of the when/how/what of valuation here. This is available on the G drive, because it is only available for internal use: G:\Property_ORGPROJ\Orgproj\ModelingXIII\onboarding materials
+
+
