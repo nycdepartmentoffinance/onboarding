@@ -81,15 +81,15 @@ Good news - it's simple to configure the tools we need (git, R, python, etc.) to
 git config --list
 ```
 
-3. Set the following Git configuration settings, replacing the user.name and the user.email with the appropriate values:
+3. Set the following Git configuration settings, replacing user.name, user.email, and proxy with the appropriate values (ask Claire or anyone on DOF team for the proxy information):
 
 ```{bash}
 # replace with your name and email
 git config --global user.name "FirstName LastName"
 git config --global user.email "lastfirst@finance.nyc.gov"
 git config --global http.sslbackend schannel
-git config --global http.proxy http://bcpxy.nycnet:8080
-git config --global https.proxy https://bcpxy.nycnet:8080
+git config --global http.proxy http://YOUR_HOSTNAME:PORT
+git config --global https.proxy https://YOUR_HOSTNAME:PORT
 ```
 4. Check to make sure the configuration settings were set correctly by calling the following command again:
 
