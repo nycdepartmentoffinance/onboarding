@@ -18,10 +18,10 @@ Now that we have located our home directory, we can create our blank `.Renviron`
 file.create("C:/Users/BoydClaire/.Renviron", overwrite=FALSE)
 ```
 
-Open this file in RStudio to add values to it. Then, in the newly created `.Renviron` file, copy and paste the following into it:
+Open this file in RStudio to add values to it. Then, in the newly created `.Renviron` file, copy and paste the following into it (ask Claire or another DOF member for the relevant hostname, port):
 ```
-http_proxy = bcpxy.nycnet:8080
-https_proxy = bcpxy.nycnet:8080
+http_proxy = YOUR_HOSTNAME:PORT
+https_proxy = YOUR_HOSTNAME:PORT
 ```
 
 This saves the above as environmental variables that are used when configuring the R session. 
@@ -31,8 +31,8 @@ to use as needed for any given project:
 ```
 # proxy information
 
-http_proxy = bcpxy.nycnet:8080
-https_proxy = bcpxy.nycnet:8080
+http_proxy = ##########################
+https_proxy = #########################
 
 #github info
 GITHUB_PAT=###############
