@@ -10,9 +10,9 @@ For a more detailed overview of the property modeling process, here are a few re
 
 -   [Tax and Assessed Value](resources/tax_and_assessed_value.pptx): This powerpoint gives an overview of the different tax classes and how their assessed values are determined due to their different assessment ratios.
 
-    -   [Tax 1 Class Guide](resources/class_1_guide.pdf): This brief guide gives a sense of how Tax Class 1 properties (single family homes) are valued and what exemptions exist.
+    -   [Tax 1 Class Guide](https://www.nyc.gov/assets/finance/downloads/pdf/brochures/class_1_guide.pdf): This brief guide gives a sense of how Tax Class 1 properties (single family homes) are valued and what exemptions exist.
 
-    -   [Tax 2 Class Guide](resources/class_2_guide.pdf): Similarly, this guide gives a sense of how Tax Class 2 properties (co-ops, condos, rentals, and 4+ units) are valued and what exemptions exist.
+    -   [Tax 2 Class Guide](https://www.nyc.gov/assets/finance/downloads/pdf/brochures/class_2_guide.pdf): Similarly, this guide gives a sense of how Tax Class 2 properties (co-ops, condos, rentals, and 4+ units) are valued and what exemptions exist.
 
 -   [Statutory Framework](resources/statutory_framework.pdf): This powerpoint gives a detailed overview of the legal framework around the current property tax system, including regulation around tax filings.
 
