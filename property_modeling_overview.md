@@ -16,8 +16,6 @@ For a more detailed overview of the property modeling process, here are a few re
 
 -   [Statutory Framework](resources/statutory_framework.pdf): This powerpoint gives a detailed overview of the legal framework around the current property tax system, including regulation around tax filings.
 
--   [Property Guide](resources/fy25_property_guide.pdf): This guide includes detailed notes about how specific types of properties are valued, decodes for some of our data, etc. This is written primarily for Tax Assessors who are valuing property individually, so it’s not all relevant for us, but it’s a good overview of the when/how/what of valuation here.
-
 -   [PVM Data Dictionary](https://nycdepartmentoffinance.github.io/data_dictionary/): This site gives an overview of all the data we have available in a few different pages of searchable tables.
 
 ### Modeling Process
@@ -60,7 +58,7 @@ To summarize, this is a general sense of each of the tools we use:
 
     -   **Python/Anaconda** – One or two inputs use python, and you are welcome to code in python for any assignments
 
-### Additional Links
+### Additional Resources (Internal)
 
 -   [Citytime](https://prod.citytime.nycnet/) (only works in-network on work computers)
 
@@ -71,5 +69,7 @@ To summarize, this is a general sense of each of the tools we use:
 -   [FinanceNET](https://nyco365.sharepoint.com/sites/DOF-FINANCENET/SitePages/Home.aspx)
 
 -   [Property Modeling SharePoint Site](https://nyco365.sharepoint.com/sites/DOF-PropertyDivision/ProjectModelling/SitePages/Home.aspx)
+
+-   [Property Guide]: This guide includes detailed notes about how specific types of properties are valued, decodes for some of our data, etc. This is written primarily for Tax Assessors who are valuing property individually, so it’s not all relevant for us, but it’s a good overview of the when/how/what of valuation here. This is available on the G drive: G:\Property_ORGPROJ\Orgproj\ModelingXIII\onboarding materials
 
 -   [Digital Tax Map](http://gis.nyc.gov/taxmap/map.htm)
