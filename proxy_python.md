@@ -36,7 +36,7 @@ After you are confident python is installed, proceed with the following steps to
 
 10. Select "Path" in the top table, and click on "Edit..."
 
-<img src="https://github.com/user-attachments/assets/dfd98b4d-c426-4f27-b965-f08df65d1b78" style="width:600px;"/>
+<img src="https://github.com/user-attachments/assets/2ca566f4-65a9-49c1-9e6c-18951a2c83ae" style="width:600px;"/>
 
 11. Add three new variables to the PATH based on the file path that you got from the command above, which for me were the following (aka the original path the command returned as well as two sub-folders: `\Scripts` and `\Library\bin`):
 
