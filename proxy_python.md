@@ -82,19 +82,11 @@ Like the instructions linked above, you need to:
 ```
 http://[hostname]:[port]
 ```
-It should look like this:
-
-<img src="https://github.com/user-attachments/assets/1970bd03-5252-42df-b182-f292f5f5b6bf" style="width:600px;"/>
 
 5. Add HTTPS_PROXY as:
 ```
 https://[hostname]:[port]
 ```
-
-It should look like the following after you add the variables:
-
-<img src="https://github.com/user-attachments/assets/64887d6e-b505-4912-a1b4-94632a71c5d0" style="width:600px;"/>
-
 
 To test if these were set correctly, you can check by opening the command prompt and entering the following:
 
