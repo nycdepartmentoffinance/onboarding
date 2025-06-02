@@ -112,10 +112,6 @@ Let's say we have pip installed, and want to proceed with setting up the proxy w
 ```
 cpg-config.ps1 http://[hostname]:[port] pip 
 ```
-3. If it ran successfully, it should look something like this:
-
-<img src="https://github.com/user-attachments/assets/9082a03e-ec35-4823-8138-fdf7dde9e611" style="width:600px;"/>
-
 
 ### 5. Test proxy with pip
 
