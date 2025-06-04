@@ -22,23 +22,34 @@ To verify if **Python** are properly installed and accessible from the command l
 
 <img src="https://github.com/user-attachments/assets/079f2557-c749-47c7-a49b-998e020ef29e" style="width:600px;"/>
 
-7. If at this point there is no python.exe on your machine, reach out to the City Help Desk to have Anaconda installed.
+7. If at this point there is no python.exe on your machine, check in PowerShell. Open **PowerShell** by typing PowerShell in the Control Panel.
+
+8. Once in PowerShell, type `py` to start a python session, and then type the following to look for the python.exe path:
+
+  ```
+  import sys
+  sys.executable
+  ```
+
+It should return something like the following: 
+
+<img src="https://github.com/user-attachments/assets/80a5099e-3fe8-4891-aa40-f93bb3bb0e9f" style="width:600px;"/>
 
 After you are confident python is installed, proceed with the following steps to add the location of the python executable to your PATH.
 
-8. In the Control Panel, search for where to edit your Environment Variables
+9. In the Control Panel, search for where to edit your Environment Variables
 
 <img src="https://github.com/user-attachments/assets/11466dba-0076-4e45-9164-b410da324c0c" style="width:600px;"/>
 
-9. Click on "Environmental Variables..."
+10. Click on "Environmental Variables..."
 
 <img src="https://github.com/user-attachments/assets/1a298ab3-fe96-44eb-a850-8a6c01cb7498" style="width:600px;"/>
 
-10. Select "Path" in the top table, and click on "Edit..."
+11. Select "Path" in the top table, and click on "Edit..."
 
 <img src="https://github.com/user-attachments/assets/2ca566f4-65a9-49c1-9e6c-18951a2c83ae" style="width:600px;"/>
 
-11. Add three new variables to the PATH based on the file path that you got from the command above, which for me were the following (aka the original path the command returned as well as two sub-folders: `\Scripts` and `\Library\bin`):
+12. Add three new variables to the PATH based on the file path that you got from the command above, which for me were the following (aka the original path the command returned as well as two sub-folders: `\Scripts` and `\Library\bin`):
 
 ```
 C:\ProgramData\Anaconda3
@@ -112,6 +123,15 @@ Let's say we have pip installed, and want to proceed with setting up the proxy w
 ```
 cpg-config.ps1 http://[hostname]:[port] pip 
 ```
+You may get the following error message when trying to run this powershell script.
+
+<img src="https://github.com/user-attachments/assets/330b32d7-54ca-477d-8db6-85e9aaab9166" style="width:1000px;"/>
+
+If you do, use the following command to bypass the execution policy:
+```
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+```
+After doing this, re-run the line of code above and it should work.
 
 ### 5. Test proxy with pip
 
