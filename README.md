@@ -7,6 +7,7 @@ Here are few guides to get you started:
 * [Property Modeling Overview](property_modeling_overview.md)
 * [Github Set-up](github.md)
 * [Repository Best Practices](repository_bestpractices.md)
+* [Helpful Resources](helpful_resources.md)
 
 Depending on which language you prefer to program in, here are some guides on how to set up your environment with the proxy and start a new project:
 
