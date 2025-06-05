@@ -122,7 +122,7 @@ For our purposes, most of the folders on GitHub will be set to private so only D
 For an example of a private repository, try the following:
 
 ```{bash}
-git clone https://github.com/nycdepartmentoffinance/onboarding.git
+git clone https://github.com/nycdepartmentoffinance/git_demo.git
 ```
 
 3. Connect to github through your browser:
