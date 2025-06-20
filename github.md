@@ -112,7 +112,7 @@ cd /workspace_local
 2. Clone this public repository (as a test) using the following command:
 
 ```{bash}
-git clone https://github.com/nycdepartmentoffinance/nycdepartmentoffinance.github.io.git
+git clone https://github.com/nycdepartmentoffinance/git_demo.git
 ```
 
 Note: if the repository is "public" then it will clone (copy) without needing to offer any other information. 
@@ -122,7 +122,7 @@ For our purposes, most of the folders on GitHub will be set to private so only D
 For an example of a private repository, try the following:
 
 ```{bash}
-git clone https://github.com/nycdepartmentoffinance/git_demo.git
+git clone https://github.com/nycdepartmentoffinance/coop_sales_model.git
 ```
 
 3. Connect to github through your browser:
