@@ -70,6 +70,8 @@ To make sure that git is downloaded, you can check by opening a terminal in comm
 
 Our machines at DOF connect to the internet through a SOCKS proxy which allows OTI to ensure our data and systems are secure. Because of this, we must configure Git to connect to the internet through a proxy server in order to access GitHub. This is necessary because the terminal or command prompt on your machine is not directly connected to the internet. Without connecting to the proxy, Git operations will fail due to a timeout error when trying to access GitHub (e.g., `connection timeout with port 22`). This is because the terminal is trying to access GitHub directly, bypassing the proxy, which is used for all other network communication on your machine.
 
+![image](https://github.com/user-attachments/assets/da801ff4-4940-454b-9d3b-e50a1f46351c)
+
 Good news - it's simple to configure the tools we need (git, R, python, etc.) to recognize the proxy and connect to the internet securely.
 
 ##### Steps to Set Up Git with Proxy:
