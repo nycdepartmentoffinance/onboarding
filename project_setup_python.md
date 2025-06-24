@@ -120,8 +120,8 @@ channels:
   - conda-forge
   - defaults
 proxy_servers:
-  http: bcpxy.nycnet:8080
-  https: bcpxy.nycnet:8080
+  http: HOSTNAME:PORT
+  https: HOSTNAME:PORT
 ```
 
 After this is complete, run the following to activate a conda environment for your project in the terminal:
