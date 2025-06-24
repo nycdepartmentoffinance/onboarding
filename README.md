@@ -1,6 +1,6 @@
 # Onboarding
 
-Welcome to Property Modeling & Valuation at DOF!
+Welcome to GitHub at DOF!
 
 Here are few guides to get you started:
 
