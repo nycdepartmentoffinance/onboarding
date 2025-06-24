@@ -13,7 +13,7 @@
     - go to your repository on github and copy the .git url (press green button Code and then under HTTPS press the copy button for the `Clone using the web URL`)
     - use the following command to clone the repo with relevant proxy information (also in a terminal or command prompt)
       ```
-      git clone https://github.com/nycdepartmentoffinance/onboarding.git -c "http.proxy=http://bcpxy.nycnet:8080" -c "https.proxy=https://bcpxy.nycnet:8080"
+      git clone https://github.com/nycdepartmentoffinance/onboarding.git -c "http.proxy=http://HOSTNAME:PORT" -c "https.proxy=https://HOSTNAME:PORT"
       ```
     - a pop-up will likely come up which will ask you to log in to github (using your user/password or a personal access token).
     - once you do that, the local clone should be complete!
