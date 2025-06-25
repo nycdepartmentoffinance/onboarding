@@ -108,13 +108,67 @@ echo %HTTP_PROXY%
 It should return the value you just set it as.
 
 
-### 4. Configure conda, pip and git with proxy
+
+### 4. Download VSCode
+
+If you are programming in python, I find it easier to program in an Integrated Development Environment (IDE) -- basically a software that helps you keep track of your work in a much more user friendly way.
+
+The Microsoft IDE is called [VSCode](https://code.visualstudio.com/download) and is very similar to RStudio, Jupyter, or SAS Enterprise in that it has a place for you to write your code and a terminal or console where your code is being run and output is generated. The special benefit of VSCode is that it has a github extension that helps you keep track of the versioning of your code as it changes.
+
+
+### 4. Configure VSCode
+
+Next, open VSCode and go to File > Preferences > Settings or hold down `Ctrl` and `,` to get to the same screen.
+
+Type in "proxy" in the `Search settings...` bar. You should see a few options. Under the "Http: Proxy Authorization" there should be a hyperlink that says, "Edit in settings.json". Click on that, which will open the settings.json file.
+
+Now, we can update a few settings directly. Copy and paste the following into your settings.json file (changing the all CAPS inputs accordingly).
+
+```
+{
+    "python.pythonPath": "[path\\to\\python]", #  my version: "C:\\ProgramData\\Anaconda3"
+    "http.proxy": "http://[hostname]:[port]",
+    "http.proxyStrictSSL": false,
+    "terminal.integrated.env.windows": {
+      "HTTP_PROXY": "http://[hostname]:[port]",
+      "HTTPS_PROXY": "http://[hostname]:[port]",
+    },
+    "http.proxyAuthorization": null,
+
+    # any other customizations you want (optional)
+    "workbench.colorTheme": "SAS Light",
+  }
+```
+
+After we have added this to settings.json, save the file and restart VSCode (either quit and re-open it or Ctrl++Shift+P to get to Command Pallette and type `Reload Window`).
+
+This does a few things:
+- tells VSCode where to look for your python executable
+- tells VSCode how to connect to the proxy server, in order to download relevant extensions (e.g. Jupyter, GitHub, etc.)
+
+Now that we have that set up, you can set up Jupyter in order to work in notebook files. Open a new .ipynb file by going to File > New File > Jupyter Notebook.
+
+Once the new file opens, there should be a toggle on the top right corner that says "Select Kernel". Click on that. It should have the version of python that you pointed to in the python path in settings.json listed. If it doesn't, then go to "Select Another Kernel", "Python Environments..." and then your python version (with a path to your executable) should be listed. 
+
+Next, select a version of Python to use in your kernel.
+
+To make sure it's working correctly, add a code chunk in your new .ipynb file by pressing "+Code". Add the following to the code chunk and press the play button next to the top left hand corner.
+```python
+2 + 2
+```
+It should run, give a green check, and spit out 4 as the output below the code chunk.
+
+
+### 5. Configure conda, pip and git with the proxy server
 Now that we have python ready, we can configure our tools to work with the proxy.
 
-At this point you should take stock of which of these tools you have installed. For conda, you can check by typing each of the three programes (`git`, `conda`, `pip`) into the command prompt terminal:
+At this point you should take stock of which of these tools you have installed. You can check by typing each of the three programs (`git`, `conda`, `pip`) into the command prompt terminal:
  ```
  conda
+ git
+ pip
  ```
+
 If nothing appears for conda, repeat the instructions listed for python above but with conda. If you do not have `pip` or `git` (or similarly get error messages when typing them into the terminal), then you need to install them. Explore installation instructions for github [here](https://github.com/nycdepartmentoffinance/onboarding/blob/main/github.md) or documentation for pip [here](https://pip.pypa.io/en/stable/user_guide/). Pip should be installed once you have Python, especially if you are getting it from an Anaconda distribution.  
 
 Let's say we have pip installed, and want to proceed with setting up the proxy with just pip. 
@@ -133,7 +187,7 @@ Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 ```
 After doing this, re-run the line of code above and it should work.
 
-### 5. Test proxy with pip
+### 6. Test proxy with pip
 
 Now we can test the proxy configuration by trying to download a package using pip. The following should work in a command prompt terminal without any additional arguments (e.g. trusted host)
 ```
