@@ -96,7 +96,7 @@ http://[hostname]:[port]
 
 5. Add HTTPS_PROXY as:
 ```
-https://[hostname]:[port]
+http://[hostname]:[port]
 ```
 
 To test if these were set correctly, you can check by opening the command prompt and entering the following:
