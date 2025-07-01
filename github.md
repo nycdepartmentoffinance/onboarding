@@ -74,7 +74,24 @@ Our machines at DOF connect to the internet through a SOCKS proxy which allows O
 
 Good news - it's simple to configure the tools we need (git, R, python, etc.) to recognize the proxy and connect to the internet securely.
 
+##### Find your proxy information
+
+1. Search `Proxy` in the Control Panel on your Windows machine to open your proxy settings.
+<img src="https://github.com/user-attachments/assets/1306debc-1169-48d8-ab7e-fc2ff42aa80e" width="400">
+
+2. Under "Manual proxy setup", there should be some information about your configuration.
+
+<img src="https://github.com/user-attachments/assets/74b2f930-98a5-4253-a938-a95c4d6fe289" width="400">
+
+3. Take a look at the contents of the "Address" configuration. It should include the following information, with likely repeats of the hostname and ports. 
+```
+http=[hostname]:[port];https=[hostname]:[port];ftp=[hostname]:[port];Socks=[hostname]:[port]
+```
+4. The most important part here to note is the hostname and port for the HTTP and the HTTPS proxy. 
+
 ##### Steps to Set Up Git with Proxy:
+
+Now that we have the proxy information for our machine, we can configure git accordingly.
 
 1. Open your terminal or command prompt.
 2. First, look to see what your git configuration settings are with the following command:
@@ -82,7 +99,6 @@ Good news - it's simple to configure the tools we need (git, R, python, etc.) to
 ```{bash}
 git config --list
 ```
-
 3. Set the following Git configuration settings, replacing user.name, user.email, and proxy with the appropriate values (ask Claire or anyone on DOF team for the proxy information):
 
 ```{bash}
