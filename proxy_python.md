@@ -55,7 +55,6 @@ After you are confident python is installed, proceed with the following steps to
 C:\ProgramData\Anaconda3
 C:\ProgramData\Anaconda3\Scripts
 C:\ProgramData\Anaconda3\Library\bin
-
 ```
 
 <img src="https://github.com/user-attachments/assets/bafacf6e-9bb6-4991-82a1-a61facb915de" style="width:600px;"/>
@@ -81,39 +80,24 @@ To quit out of the python session, type the following command:
 quit()
 ```
 
-### 3. Set HTTP_PROXY and HTTPS_PROXY as environmental variables in your local machine
-
-Now that python is successfully set up, we can configure our proxy settings in order to connect to the internet properly. To do this, we need to set `HTTP_PROXY` and `HTTPS_PROXY` as environmental variables in your local machine. Ask Claire or another DOF team member for the hostname and port for our proxy.
-
-Like the instructions linked above, you need to:  
-1. In Control Panel, type in **View advanced system settings**
-2. Click on **Environment Variables...**
-3. In the first "User variables" section, click on **New...**
-4. Add HTTP_PROXY as:
-```
-http://[hostname]:[port]
-```
-
-5. Add HTTPS_PROXY as:
-```
-http://[hostname]:[port]
-```
-
-To test if these were set correctly, you can check by opening the command prompt and entering the following:
-
-```
-echo %HTTP_PROXY%
-```
-
-It should return the value you just set it as.
-
-
-
-### 4. Download VSCode
+### 3. Download VSCode
 
 If you are programming in python, I find it easier to program in an Integrated Development Environment (IDE) -- basically a software that helps you keep track of your work in a much more user friendly way.
 
 The Microsoft IDE is called [VSCode](https://code.visualstudio.com/download) and is very similar to RStudio, Jupyter, or SAS Enterprise in that it has a place for you to write your code and a terminal or console where your code is being run and output is generated. The special benefit of VSCode is that it has a github extension that helps you keep track of the versioning of your code as it changes.
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ### 4. Configure VSCode
@@ -134,9 +118,11 @@ Now, we can update a few settings directly. Copy and paste the following into yo
       "HTTPS_PROXY": "http://[hostname]:[port]",
     },
     "http.proxyAuthorization": null,
+    "terminal.integrated.defaultProfile.windows": "Command Prompt",
+    "http.proxySupport": "on",
 
     # any other customizations you want (optional)
-    "workbench.colorTheme": "SAS Light",
+    "workbench.colorTheme": "Visual Studio Light"
   }
 ```
 
@@ -145,6 +131,35 @@ After we have added this to settings.json, save the file and restart VSCode (eit
 This does a few things:
 - tells VSCode where to look for your python executable
 - tells VSCode how to connect to the proxy server, in order to download relevant extensions (e.g. Jupyter, GitHub, etc.)
+
+
+### 5. Configure pip and git with the proxy server
+
+Now that we have python and VSCode downloaded and installed, we can configure our tools to work with the proxy.
+
+At this point you should take stock of which of these tools you have installed. You can check by typing each of the three programs (`git`, `pip`) into the command prompt terminal:
+ ```
+ git
+ pip
+ ```
+
+If you do not have `pip` or `git` (or similarly get error messages when typing them into the terminal), then you need to install them. Explore installation instructions for github [here](https://github.com/nycdepartmentoffinance/onboarding/blob/main/github.md) or documentation for pip [here](https://pip.pypa.io/en/stable/user_guide/). Pip should be installed once you have Python, especially if you are getting it from an Anaconda distribution.  
+
+Let's configure both git and pip at once (note: this will overwrite any configs you have for either program):
+1. Download the raw file (download icon) for [this powershell script](proxy-config.ps1) and save it to your home directory. It basically sets the proxy settings for conda, pip and git all at once or can set them individually by passing in an optional argument specifying which ones to set up. 
+2. In a command prompt terminal, type the following. If you do not include the last argument, it will configure conda, git and pip all at once. This is super valuable if you already have all three installed and ready to go. For me, I want to only configure pip and git so I used the collowing command:
+```
+powershell -ExecutionPolicy Bypass -File "proxy-config.ps1" http://[hostname]:[port] git-pip
+```
+
+### 6. Test proxy with pip
+
+Now we can test the proxy configuration by trying to download a package using pip. The following should work in a command prompt terminal without any additional arguments (e.g. trusted host)
+```
+pip install ipykernel jupyterlab notebook
+```
+
+### 7. Test setup in jupyter notebook
 
 Now that we have that set up, you can set up Jupyter in order to work in notebook files. Open a new .ipynb file by going to File > New File > Jupyter Notebook.
 
@@ -157,41 +172,3 @@ To make sure it's working correctly, add a code chunk in your new .ipynb file by
 2 + 2
 ```
 It should run, give a green check, and spit out 4 as the output below the code chunk.
-
-
-### 5. Configure conda, pip and git with the proxy server
-Now that we have python ready, we can configure our tools to work with the proxy.
-
-At this point you should take stock of which of these tools you have installed. You can check by typing each of the three programs (`git`, `conda`, `pip`) into the command prompt terminal:
- ```
- conda
- git
- pip
- ```
-
-If nothing appears for conda, repeat the instructions listed for python above but with conda. If you do not have `pip` or `git` (or similarly get error messages when typing them into the terminal), then you need to install them. Explore installation instructions for github [here](https://github.com/nycdepartmentoffinance/onboarding/blob/main/github.md) or documentation for pip [here](https://pip.pypa.io/en/stable/user_guide/). Pip should be installed once you have Python, especially if you are getting it from an Anaconda distribution.  
-
-Let's say we have pip installed, and want to proceed with setting up the proxy with just pip. 
-1. Download the raw file (download icon) for [this powershell script](https://github.com/nycdepartmentoffinance/conda-git-pip-proxy/blob/master/cpg-config.ps1) and save it to your home directory. It basically sets the proxy settings for conda, pip and git all at once or can set them individually by passing in an optional argument specifying which ones to set up. 
-2. In a powershell terminal, type the filepath of the file, the name of the proxy, and then the program you want to configure. If you do not include the last argument, it will configure conda, git and pip all at once. This is super valuable if you already have all three installed and ready to go. For me, it was:
-```
-cpg-config.ps1 http://[hostname]:[port] pip 
-```
-You may get the following error message when trying to run this powershell script.
-
-<img src="https://github.com/user-attachments/assets/330b32d7-54ca-477d-8db6-85e9aaab9166" style="width:1000px;"/>
-
-If you do, use the following command to bypass the execution policy:
-```
-Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
-```
-After doing this, re-run the line of code above and it should work.
-
-### 6. Test proxy with pip
-
-Now we can test the proxy configuration by trying to download a package using pip. The following should work in a command prompt terminal without any additional arguments (e.g. trusted host)
-```
-python -m pip install PACKAGE_NAME
-```
-
-Now you're done! Congrats on making it through all these tedious steps!
