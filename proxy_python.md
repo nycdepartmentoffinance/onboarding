@@ -20,6 +20,8 @@ In this guide, we'll walk you through the following steps:
 
 This might seem like a lot of steps, but it is worth it! If you have any questions or need additional support on this guide, feel free to reach out to boydclaire@finance.nyc.gov.
 
+**Huge Techinical Note**: The following works with versions of Python<=3.12. There is an upgrade s
+
 ## Make sure Python is installed and added to your PATH
 
 Before proceeding with proxy set-up, ensure that **Python** is installed on your system and available in your system's **PATH**. This will allow you to use these tools from the command line.
@@ -304,42 +306,83 @@ pip install requests
 ```
 Next, let's start a python session by typing `python`. 
 
-To check the internet connection, let's try downloading a package and 
-
-@TODO
-
+To check the internet connection, let's try accessing the internet from the command line in python:
 ```
 import requests
 response = requests.get("https://www.google.com", timeout=5)
+response.status_code
 ```
 
+If the internet connection through the proxy is set up correctly, then you should get a `200` status code. If you are running a more recent version of Python (~3.13), you might hit an error like this:
+```
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='www.google.com', port=443): Max retries exceeded with url: / (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Missing Authority Key Identifier (_ssl.c:1028)')))
+```
 
+This is because our certification file does not have the Authority Key Identifier, which is required for new versions of OpenSSL (3.0.10+) which is the default for newer versions of Python. To check if this is the problem, you can summarize the `.pem` file components by using the command:
 
+```
+openssl x509 -in PATH_TO_PEM_FILE -noout -text
 
+```
 
+This will print a summary to the console. It should have a section like this in order to work correctly with the newest versions of openssl:
+```
+X509v3 extensions:
+    X509v3 Authority Key Identifier: 
+        keyid://////////////////////
+```
+
+But, our certificates may only have the following under `X509v3 extensions`:
+```
+X509v3 extensions:
+    X509v3 Basic Constraints: critical
+        ///////////
+    X509v3 Key Usage:
+        ///////////
+```
+
+While we update the certificates to accomodate this issue, we can use the following the truststore package in python to help configure this for us. Use the following code to check for a stable internet connection:
+```
+import truststore
+truststore.inject_into_ssl()
+
+import requests
+response = requests.get("https://www.google.com", timeout=5)
+response.status_code
+```
+
+If you get a `200` status code, you are all set up!!
 
 **Jupyter Notebooks**
 
-@TODO
+Now that python is correctly configured, let's ensure this is true for Jupyter notebooks as well.
 
-
+First, install the necessary packages using pip (this might take like ~10-15 minutes, so be patient if it's installing for awhile):
 ```
 pip install ipykernel jupyterlab notebook
 ```
 
+Next, let's open a new .ipynb file by going to File > New File > Jupyter Notebook.
 
-
-
-
-
-you can set up Jupyter in order to work in notebook files. Open a new .ipynb file by going to File > New File > Jupyter Notebook.
-
-Once the new file opens, there should be a toggle on the top right corner that says "Select Kernel". Click on that. It should have the version of python that you pointed to in the python path in settings.json listed. If it doesn't, then go to "Select Another Kernel", "Python Environments..." and then your python version (with a path to your executable) should be listed. 
-
-Next, select a version of Python to use in your kernel.
+Once the new file opens, there should be a toggle on the top right corner that says "Select Kernel". Click on that. It should have the version of python that you pointed to in the python path in `settings.json` listed. If it doesn't, then go to "Select Another Kernel", "Python Environments..." and then your python version (with a path to your executable) should be listed. Select a version of Python to use in your kernel.
 
 To make sure it's working correctly, add a code chunk in your new .ipynb file by pressing "+Code". Add the following to the code chunk and press the play button next to the top left hand corner.
 ```python
 2 + 2
 ```
 It should run, give a green check, and spit out 4 as the output below the code chunk.
+
+Great! Base python is working.
+
+Now, let's try the same code chunk from before to access the internet.
+
+```python
+import requests
+response = requests.get("https://www.google.com", timeout=5)
+response.status_code
+```
+You should get the same 200 status code. 
+
+## You did it!
+
+Congratulations!! You made it!! Everything is successfully configured and you're ready to use python to your heart's content!!
