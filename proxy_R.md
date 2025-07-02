@@ -2,8 +2,22 @@
 
 To use the proxy, you'll need to do a few things to make sure that your R sessions are configured correctly to connect to the internet and can connect to our DOF databases correctly and securely.
 
-To make this easy, RStudio loads in two different files `.renviron` and `.rprofile` every time a new R session starts. 
-We can use these files to configure our settings so that our session is always configured correctly and we don't need to customize requests to use the proxy everytime.
+To make this easy, RStudio loads in two different files `.renviron` and `.rprofile` every time a new R session starts. We can use these files to configure our settings so that our session is always configured correctly and we don't need to customize requests to use the proxy everytime.
+
+## Find your proxy information
+
+1. Search `Proxy` in the Control Panel on your Windows machine to open your proxy settings.
+  <img src="https://github.com/user-attachments/assets/1306debc-1169-48d8-ab7e-fc2ff42aa80e" width="400">
+
+2. Under "Manual proxy setup", there should be some information about your configuration.
+
+  <img src="https://github.com/user-attachments/assets/74b2f930-98a5-4253-a938-a95c4d6fe289" width="400">
+
+3. Take a look at the contents of the "Address" configuration. It should include the following information, with likely repeats of the hostname and ports. 
+  ```
+  http=[hostname]:[port];https=[hostname]:[port];ftp=[hostname]:[port];Socks=[hostname]:[port]
+  ```
+4. The most important part here to note is the hostname and port for the HTTP and the HTTPS proxy. 
 
 ## Creating an `.Renviron` file
 
@@ -18,10 +32,10 @@ Now that we have located our home directory, we can create our blank `.Renviron`
 file.create("C:/Users/BoydClaire/.Renviron", overwrite=FALSE)
 ```
 
-Open this file in RStudio to add values to it. Then, in the newly created `.Renviron` file, copy and paste the following into it (ask Claire or another DOF member for the relevant hostname, port):
+Open this file in RStudio to add values to it. Then, in the newly created `.Renviron` file, copy and paste the following into it:
 ```
-http_proxy = YOUR_HOSTNAME:PORT
-https_proxy = YOUR_HOSTNAME:PORT
+http_proxy = YOUR_HOSTNAME:YOUR_PORT
+https_proxy = YOUR_HOSTNAME:YOUR_PORT
 ```
 
 This saves the above as environmental variables that are used when configuring the R session. 

@@ -1,8 +1,28 @@
 # Proxy set-up for python
 
-Before proceeding with proxy set-up, ensure that **Python** is installed on your system and available in your system's **PATH**. This will allow you to use these tools from the command line.
+Welcome to our guide on how to set up a working coding environment for python configured to use the city's proxy server. 
 
-### 1. Make sure Python is installed and added to your PATH
+**Why do we need to do this?**
+
+Our city machines connect to the internet through a proxy server which allows OTI to ensure our data and systems are secure. Because of this, we must configure our software/applications to connect to the internet through a proxy server in order to access the internet. 
+
+This is necessary because by default our systems are not yet configured to connect to the internet through the proxy. Without connecting to the proxy, using common tools like git, pip, and other software that requires a stable internet connection will fail due to a HTTPConnection error or timeout error when trying to access an internet connection (e.g., `connection timeout with port 22`). This is because the terminal is trying to access GitHub directly, bypassing the proxy, which is used for all other network communication on your machine.
+
+<img src="https://github.com/user-attachments/assets/da801ff4-4940-454b-9d3b-e50a1f46351c" width="400">
+
+In this guide, we'll walk you through the following steps:
+- check for python installation and (if needed) add it to your PATH
+- how to find your proxy information
+- how to download and save your SSL certificate
+- how to download and configure VSCode
+- how to install and configure `pip`
+- how to test to make sure everything has been set up properly
+
+This might seem like a lot of steps, but it is worth it! If you have any questions or need additional support on this guide, feel free to reach out to boydclaire@finance.nyc.gov.
+
+## Make sure Python is installed and added to your PATH
+
+Before proceeding with proxy set-up, ensure that **Python** is installed on your system and available in your system's **PATH**. This will allow you to use these tools from the command line.
 
 To verify if **Python** are properly installed and accessible from the command line, follow these steps:
 1. Open the **Command Prompt**.
@@ -63,7 +83,7 @@ C:\ProgramData\Anaconda3\Library\bin
 [How to add Conda to PATH](https://stackoverflow.com/questions/44515769/conda-is-not-recognized-as-internal-or-external-command).
 
 
-### 2. Test to make sure that python is working correctly from Command Prompt
+## Test to make sure that python is working correctly from Command Prompt
 In a new session of command prompt, type the following:
 ```
 python
@@ -80,61 +100,92 @@ To quit out of the python session, type the following command:
 quit()
 ```
 
-### 3. Download & Configure git 
+## Find your proxy information
 
-If you haven't already, follow the [git set-up instructions](github_setup.md) to download and configure git correctly using the proxy server.
+1. Search `Proxy` in the Control Panel on your Windows machine to open your proxy settings.
+  <img src="https://github.com/user-attachments/assets/1306debc-1169-48d8-ab7e-fc2ff42aa80e" width="400">
 
-This guide will help you do a few different things:
+2. Under "Manual proxy setup", there should be some information about your configuration.
 
-- identify the correct proxy hostname and port to use for the rest of the set-up, found in the Proxy Settings screen on Windows under "Address".
-- walk you through the steps/commands to tell git to use this proxy to connect to the internet.
+  <img src="https://github.com/user-attachments/assets/74b2f930-98a5-4253-a938-a95c4d6fe289" width="400">
 
-Please complete this step before proceeding with the python set-up.
+3. Take a look at the contents of the "Address" configuration. It should include the following information, with likely repeats of the hostname and ports. 
+  ```
+  http=[hostname]:[port];https=[hostname]:[port];ftp=[hostname]:[port];Socks=[hostname]:[port]
+  ```
+4. The most important part here to note is the hostname and port for the HTTP and the HTTPS proxy. 
 
-### 5. Downloading and saving your SSL certificate
+## Download and saving your SSL certificate
 
-This step is a bit tricky, but we'll walk you through every step of the way so don't fear!
+An SSL certificate is a file (in our case a `.pem` file) that helps keep your connection to a website secure. It proves the website is real and allows information to be encrypted, so others can’t see what you send or receive. If a site doesn’t have a trusted certificate, you might see a security warning or get blocked from connecting.
 
-If you are working with a city machine that connects to the internet through a proxy server, your browser (and other applications) are 
+You need **both the proxy information and the `.pem` file** because they serve different purposes in secure internet access:
 
-@TODO!!!
+* The **proxy information** tells your tools (like `pip` or Python) **how to reach the internet**—it acts like a middleman for all your web traffic.
+* The **`.pem` file** contains the **security certificate** that your system needs to **trust the proxy**. Without it, secure connections (like HTTPS requests) may fail because the proxy’s certificate isn’t recognized by default.
 
+In short, the proxy lets you connect, and the `.pem` file ensures that connection is trusted and secure.
 
+**Accessing and saving your SSL certificate (or `.pem` file)**
 
+Start by opening up Microsoft Edge and typing in the following to the browser:
 
+```
+edge://certificate-manager/localcerts/platformcerts
+```
 
+A screen with all of the certificates configured for your machine should pop up. There should be a blue botton called "Export". Click on that. The default name of the file is `"trusted_certs"`. Edit that to `"trusted_certs.pem"` and save it somewhere local. I navigated to my user drive and saved it there: `C:\Users\BoydClaire`.
 
+Next, open up File Explorer, navigate to that folder, and open up the .pem file. It should look something like this:
 
-### 4. Download VSCode
+```
+-----BEGIN CERTIFICATE-----
+sdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdf
+-----END CERTIFICATE-----
+-----BEGIN CERTIFICATE-----
+sdf;oaiehrtq;welinfoSIDjfosirtho'eirf'isdc
+-----END CERTIFICATE-----
+-----BEGIN CERTIFICATE-----
+
+{continued}.....
+```
+
+This means that you saved the `.pem` file correctly and you're on the right track. If when you click on the file, it opens up a security certificate the file was saved as a different format. Export the file again as a `.pem` file and make sure the format is similar to the above.
+
+## Download VSCode
 
 If you are programming in python, I find it easier to program in an Integrated Development Environment (IDE) -- basically a coding environment that helps you keep track of your work in a much more user friendly way.
 
-The Microsoft IDE is called [VSCode](https://code.visualstudio.com/download) and is very similar to RStudio, Jupyter, or SAS Enterprise in that it has a place for you to write your code and a terminal or console where your code is being run and output is generated. VSCode also has a lot of really helpful extensions -- GitHub, Jupyter, R, linters, etc. -- that make coding across langauges, in different styles, and under version control really easy. 
+The Microsoft IDE is called [Visual Studio Code (VSCode)](https://code.visualstudio.com/) and is very similar to RStudio, Jupyter, or SAS Enterprise in that it has a place for you to write your code and a terminal or console where your code is being run and output is generated. VSCode also has a lot of really helpful extensions -- GitHub, Jupyter, R, linters, etc. -- that make coding across langauges, in different styles, and under version control really easy. 
 
-The rest of the set-up instructions assume you use VSCode code for a few reasons - we tried setting up the proxy connection in a couple of different coding environments (Jupyter, Spyder) and VSCode was the easiest to configure in one major step, most stably. Please feel free to use whatever IDE you prefer and if you want to add to this guide with more detailed instructions on that set-up, let us know!
+The rest of the set-up instructions assume you use VSCode code for a few reasons. We tried setting up the proxy connection in a couple of different coding environments (Jupyter, Spyder) and VSCode was the easiest to configure in one major step, most stably. Please feel free to use whatever IDE you prefer and if you want to add to this guide with more detailed instructions on that set-up, let us know!
 
+To download VSCode, you need to:
+- [download the installer](https://code.visualstudio.com/download) for VSCode
+- click on the downloaded `.exe` file in your Downloads folder
+- click through the Installation Guide
 
-### 5. Configure VSCode
+This should only take a few minutes and VSCode should be ready to use! 
 
-Next, open VSCode and go to File > Preferences > Settings or hold down `Ctrl` and `,` to get to the same screen.
+## Configure VSCode
 
-Type in "proxy" in the `Search settings...` bar. You should see a few options. Under the "Http: Proxy Authorization" there should be a hyperlink that says, "Edit in settings.json". Click on that, which will open the settings.json file. Now, we can update a few settings directly. 
+Now, we need to configure VSCode to work with our proxy and use our SSL certificate to access the internet.
 
-Editing this file does a few things, telling VSCode:
+Start by openning VSCode and go to File > Preferences > Settings or hold down `Ctrl` and `,` to get to the same screen.
+
+Type in "proxy" in the `Search settings...` bar. You should see a few options. Under the "Http: Proxy Authorization" there should be a hyperlink that says, "Edit in settings.json". Click on that, which will open the `settings.json` file. Now, we can update a few settings directly. 
+
+Editing this file does a few things, including telling VSCode:
 - where to look for your python executable
 - how to connect to the proxy server
 - what commands to run when opening a jupyter notebook so that the configurations translate to that setting as well
 
-Copy and paste the following template into your settings.json file. You will need to replace all the terms in brackets with the relevant information for you, including:
-
-- **PATH_TO_PYTHON**: This is the path to the main python distribution that you want to use in VSCode (you might have multiple). You should use the python version that we found above. For example, I would include `"python.pythonPath": C:\\ProgramData\\Anaconda3", `. Note: this json file needs double slashes for filepaths, so you need to add those in (not just a copy paste of the above).
-- **YOUR_HOSTNAME** and **YOUR_PORT**: this information from the Proxy settings, under "Address". A step-by-step guide of how to get this information is in the [github set-up guide](github_setup.md).
-- **YOUR_PATH_TO_PEM_FILE**: This is the path to the certificate file you just created. For example I would include, `C:\\Users\\BoydClaire\\checkpoint-inspection.finance.nycnet.pem`
+Copy and paste the following template into your newly opened `settings.json` file. 
  
 ```
 {
     "python.pythonPath": "YOUR_PATH_TO_PYTHON", 
-    "http.proxy": "http://YOUR_HOSTNAME:YOUR_PORT", \\ 
+    "http.proxy": "http://YOUR_HOSTNAME:YOUR_PORT",
     "http.proxyStrictSSL": false,
     "http.proxyAuthorization": null,
     "http.proxySupport": "on",
@@ -152,36 +203,45 @@ Copy and paste the following template into your settings.json file. You will nee
         "os.environ['REQUESTS_CA_BUNDLE'] = 'YOUR_PATH_TO_PEM_FILE'"
     ],
 
-    \\ other optional settings
+    // other optional settings
     "workbench.colorTheme": "Visual Studio Light",
-    "terminal.integrated.defaultProfile.windows": "Command Prompt" \\ I prefer it over powershell
+    "terminal.integrated.defaultProfile.windows": "Command Prompt" // I prefer it over powershell
 }
 ```
-*Note:* there are multiple places where these places of information should be replaced in the json file below. Before proceeding, make sure you have changed all the CAPS text to the right side of the equals signs or colons.
 
-After we have edited the settings.json file reflecting all of your configurations, save the file and restart VSCode (either quit and re-open it or Ctrl++Shift+P to get to Command Pallette and type `Reload Window`).
+Next, you will need to replace all the terms in ALL_CAPS with the relevant information for you, including:
 
-**Working with the shell within VSCode**
+- **PATH_TO_PYTHON**: This is the path to the main python distribution that you want to use in VSCode (you might have multiple). You should use the python version that we found above. For example, I would include `"C:\\ProgramData\\Anaconda3"`. Note: this json file needs double slashes for filepaths, so you need to add those in (not just a copy paste of the above).
+- **YOUR_HOSTNAME** and **YOUR_PORT**: this information from the Proxy settings, under "Address".
+- **YOUR_PATH_TO_PEM_FILE**: This is the path to the certificate file you just created. For example I would include, `"C:\\Users\\BoydClaire\\trusted_certs.pem"`
 
-*Quick important technical note:* This proxy configuration means that the terminal/shell (for powershell, command prompt, bash, etc.) within VSCode is set up with these configurations but **if you open one of these shells outside of VSCode, these settings will not apply**. For example, if I open a command prompt shell by just typing Command Prompt in my Windows search bar and open up a terminal that way, my proxy settings are not configured there because I am only setting then from within VSCode in the settings.json file above. 
+*Note:* there are multiple places where these places of information should be replaced in the json file below. Before proceeding, make sure you have changed all the CAPS text to the right side of the equals signs or colons to your relevant information.
+
+After we have edited the `settings.json` file reflecting all of your configurations, save the file and **restart VSCode** (either quit and re-open it or Ctrl++Shift+P to get to Command Pallette and type `Reload Window`).
+
+Great job! Now your VSCode is configured!
+
+**IMPORTANT NOTE: These settings are isolated to VSCode**
+
+This proxy configuration means that the terminal/shell (for powershell, command prompt, bash, etc.) within VSCode is set up with these configurations but **if you open one of these shells outside of VSCode, these settings will not apply**. For example, if I open a command prompt shell by just typing Command Prompt in my Windows search bar and open up a terminal that way, my proxy settings are not configured there because I am only setting then from within VSCode in the settings.json file above. 
 
 Let's see if the environmental variables I saved above are accessable in my main computer configuration by testing it out in a command prompt terminal outside of VSCode:
 
 {insert pic here}
 
-Because these variables are not saved outside of VSCode, the REQUESTS_CA_BUNDLE is returning itself back to us, without anything saved.
+Because these variables are not saved outside of VSCode, the REQUESTS_CA_BUNDLE is returning itself back to us, without any value saved.
 
-That said, you can use any shell from VSCode by opening a terminal. When you Open VSCode, you can go to the top menu and select Terminal > New Teriminal. The default terminal that opens is what you can configure above with the "terminal.integrated.defaultProfile.windows" setting. In my case, I selected Command Prompt (cmd) so a cmd terminal will open. If I want a bash shell or a Powershell shell, I can go to the right side of my terminal in VSCode and click on the dropdown menu next to the `+` option. From there, I can click on any shell scripting language (bash, powershell, R, etc.).
+That said, you can open any kind of terminal from within VSCode with these corect configurations. When you Open VSCode, you can go to the top menu and select Terminal > New Teriminal. The default terminal that opens is what you can configure above with the "terminal.integrated.defaultProfile.windows" setting. In my case, I selected Command Prompt (cmd) so a cmd terminal will open. If I want a bash shell or a Powershell shell, I can go to the right side of my terminal in VSCode and click on the dropdown menu next to the `+` option. From there, I can click on any shell scripting language (bash, powershell, R, etc.).
 
 Using command prompt within VSCode and after restarting the app with the settings.json file we just configured, let's try the same command again:
 
 {insert pic here}
 
-It worked! I'm getting a real value back. This is proof that from within VSCode you can save any environmental variables to this setting file and it will be recognized by any shell from within VSCode. 
+It worked! I'm getting a real value I want back. This is proof that from within VSCode you can save any environmental variables to this setting file and it will be recognized by any shell from within VSCode. 
 
-The reason we have done it this way is to simplify the set-up process, without needing to add a bunch of global environmental variables using the [point and click interface with Windows](https://superuser.com/questions/949560/how-do-i-set-system-environment-variables-in-windows-10), which is a bit less replicable and harder to debug when environments are slightly different.
+The reason we have done it this way is to simplify the set-up process, without needing to add a bunch of global environmental variables using the [point and click interface with Windows](https://superuser.com/questions/949560/how-do-i-set-system-environment-variables-in-windows-10), which is a bit less replicable and harder to debug when environments are slightly different. There are pros and cons to this approach, so feel free to customize as needed.
 
-### 5. Configure pip with the proxy server
+## Configure pip with the proxy server
 
 Now that Python and VSCode are installed, the last major step is to configure a package installer for Python with the proxy server so that you can install any packages you need for your work through the stable, secure internet connection via the proxy. There are a few different package installers  (pip, homebrew, conda) that can all be configured with proxy settings. 
 
@@ -214,20 +274,54 @@ pip config set global.proxy YOUR_HOSTNAME:YOUR_PORT
 pip config set global.trusted-host "pypi.python.org global.trusted-host pypi.org global.trusted-host files.pythonhosted.org"
 ```
 
-Now we can test the proxy configuration by trying to download a package using pip. The following should work in a command prompt terminal without any additional arguments (e.g. trusted host)
+To double check that your configurations are saved you can always use the command:
+```
+pip config list
+```
+
+Now we can test the proxy configuration by trying to download a package using pip. The following should work in a command prompt terminal without any additional arguments (e.g. trusted host):
 ```
 pip install pandas
 ```
 
-### 6. Test setup in jupyter notebook
+`pandas` is just an example -- it should work with any pacakge name.
 
+Congratuations! Pip is now successfully installed and configured!
 
+## Testing our setup
 
 Okay! We are almost done! 
 
-Now that we have everything set up, we can test to make sure different coding environments all are accessing the internet correctly.
+Now that we have everything set up, we can test that python on its own and jupyter notebooks with VSCode both accessing the internet correctly.
 
-First, Open up VSCode
+**Python**
+
+First, Open up VSCode and open a new Command Prompt terminal by clicking on Terminal > New Terminal. Let's test our internet connection by making a simple request to `https://www.google.com`.
+
+Start by downloading a package from pip called `requests`:
+```
+pip install requests
+```
+Next, let's start a python session by typing `python`. 
+
+To check the internet connection, let's try downloading a package and 
+
+@TODO
+
+```
+import requests
+response = requests.get("https://www.google.com", timeout=5)
+```
+
+
+
+
+
+
+**Jupyter Notebooks**
+
+@TODO
+
 
 ```
 pip install ipykernel jupyterlab notebook

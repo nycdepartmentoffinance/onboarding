@@ -104,8 +104,8 @@ Now that we have the proxy information for our machine, we can configure git acc
   git config --global user.name "FirstName LastName"
   git config --global user.email "lastfirst@finance.nyc.gov"
   git config --global http.sslbackend schannel
-  git config --global http.proxy http://YOUR_HOSTNAME:PORT
-  git config --global https.proxy https://YOUR_HOSTNAME:PORT
+  git config --global http.proxy http://YOUR_HOSTNAME:YOUR_PORT
+  git config --global https.proxy https://YOUR_HOSTNAME:YOUR_PORT
   ```
 
 4. Check to make sure the configuration settings were set correctly by calling the following command again:
