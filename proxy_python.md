@@ -20,8 +20,6 @@ In this guide, we'll walk you through the following steps:
 
 This might seem like a lot of steps, but it is worth it! If you have any questions or need additional support on this guide, feel free to reach out to boydclaire@finance.nyc.gov.
 
-**Huge Techinical Note**: The following works with versions of Python<=3.12. There is an upgrade s
-
 ## Make sure Python is installed and added to your PATH
 
 Before proceeding with proxy set-up, ensure that **Python** is installed on your system and available in your system's **PATH**. This will allow you to use these tools from the command line.
