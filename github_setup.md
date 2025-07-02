@@ -75,16 +75,16 @@ Good news - it's simple to configure the tools we need (git, R, python, etc.) to
 ##### Find your proxy information
 
 1. Search `Proxy` in the Control Panel on your Windows machine to open your proxy settings.
-<img src="https://github.com/user-attachments/assets/1306debc-1169-48d8-ab7e-fc2ff42aa80e" width="400">
+  <img src="https://github.com/user-attachments/assets/1306debc-1169-48d8-ab7e-fc2ff42aa80e" width="400">
 
 2. Under "Manual proxy setup", there should be some information about your configuration.
 
-<img src="https://github.com/user-attachments/assets/74b2f930-98a5-4253-a938-a95c4d6fe289" width="400">
+  <img src="https://github.com/user-attachments/assets/74b2f930-98a5-4253-a938-a95c4d6fe289" width="400">
 
 3. Take a look at the contents of the "Address" configuration. It should include the following information, with likely repeats of the hostname and ports. 
-```
-http=[hostname]:[port];https=[hostname]:[port];ftp=[hostname]:[port];Socks=[hostname]:[port]
-```
+  ```
+  http=[hostname]:[port];https=[hostname]:[port];ftp=[hostname]:[port];Socks=[hostname]:[port]
+  ```
 4. The most important part here to note is the hostname and port for the HTTP and the HTTPS proxy. 
 
 ##### Steps to Set Up Git with Proxy:
@@ -94,25 +94,25 @@ Now that we have the proxy information for our machine, we can configure git acc
 1. Open your terminal or command prompt.
 2. First, look to see what your git configuration settings are with the following command:
 
-```{bash}
-git config --list
-```
+  ```{bash}
+  git config --list
+  ```
 3. Set the following Git configuration settings, replacing user.name, user.email, and proxy with the appropriate values (ask Claire or anyone on DOF team for the proxy information):
 
-```{bash}
-# replace with your name and email
-git config --global user.name "FirstName LastName"
-git config --global user.email "lastfirst@finance.nyc.gov"
-git config --global http.sslbackend schannel
-git config --global http.proxy http://YOUR_HOSTNAME:PORT
-git config --global https.proxy https://YOUR_HOSTNAME:PORT
-```
+  ```{bash}
+  # replace with your name and email
+  git config --global user.name "FirstName LastName"
+  git config --global user.email "lastfirst@finance.nyc.gov"
+  git config --global http.sslbackend schannel
+  git config --global http.proxy http://YOUR_HOSTNAME:PORT
+  git config --global https.proxy https://YOUR_HOSTNAME:PORT
+  ```
 
 4. Check to make sure the configuration settings were set correctly by calling the following command again:
 
-```{bash}
-git config --list --show-origin
-```
+  ```{bash}
+  git config --list --show-origin
+  ```
 
 You should see the settings you just changed at the bottom of the list, saved to a new .gitconfig file at the root of your user directory.
 

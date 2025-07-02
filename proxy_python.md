@@ -80,11 +80,24 @@ To quit out of the python session, type the following command:
 quit()
 ```
 
-### 3. Download VSCode
+### 3. Download & Configure git 
 
-If you are programming in python, I find it easier to program in an Integrated Development Environment (IDE) -- basically a software that helps you keep track of your work in a much more user friendly way.
+If you haven't already, follow the [git set-up instructions](github_setup.md) to download and configure git correctly using the proxy server.
 
-The Microsoft IDE is called [VSCode](https://code.visualstudio.com/download) and is very similar to RStudio, Jupyter, or SAS Enterprise in that it has a place for you to write your code and a terminal or console where your code is being run and output is generated. The special benefit of VSCode is that it has a github extension that helps you keep track of the versioning of your code as it changes.
+This guide will help you do a few different things:
+
+- identify the correct proxy hostname and port to use for the rest of the set-up, found in the Proxy Settings screen on Windows under "Address".
+- walk you through the steps/commands to tell git to use this proxy to connect to the internet.
+
+Please complete this step before proceeding with the python set-up.
+
+### 5. Downloading and saving your SSL certificate
+
+This step is a bit tricky, but we'll walk you through every step of the way so don't fear!
+
+If you are working with a city machine that connects to the internet through a proxy server, your browser (and other applications) are 
+
+@TODO!!!
 
 
 
@@ -92,76 +105,140 @@ The Microsoft IDE is called [VSCode](https://code.visualstudio.com/download) and
 
 
 
+### 4. Download VSCode
+
+If you are programming in python, I find it easier to program in an Integrated Development Environment (IDE) -- basically a coding environment that helps you keep track of your work in a much more user friendly way.
+
+The Microsoft IDE is called [VSCode](https://code.visualstudio.com/download) and is very similar to RStudio, Jupyter, or SAS Enterprise in that it has a place for you to write your code and a terminal or console where your code is being run and output is generated. VSCode also has a lot of really helpful extensions -- GitHub, Jupyter, R, linters, etc. -- that make coding across langauges, in different styles, and under version control really easy. 
+
+The rest of the set-up instructions assume you use VSCode code for a few reasons - we tried setting up the proxy connection in a couple of different coding environments (Jupyter, Spyder) and VSCode was the easiest to configure in one major step, most stably. Please feel free to use whatever IDE you prefer and if you want to add to this guide with more detailed instructions on that set-up, let us know!
 
 
-
-
-
-
-
-
-### 4. Configure VSCode
+### 5. Configure VSCode
 
 Next, open VSCode and go to File > Preferences > Settings or hold down `Ctrl` and `,` to get to the same screen.
 
-Type in "proxy" in the `Search settings...` bar. You should see a few options. Under the "Http: Proxy Authorization" there should be a hyperlink that says, "Edit in settings.json". Click on that, which will open the settings.json file.
+Type in "proxy" in the `Search settings...` bar. You should see a few options. Under the "Http: Proxy Authorization" there should be a hyperlink that says, "Edit in settings.json". Click on that, which will open the settings.json file. Now, we can update a few settings directly. 
 
-Now, we can update a few settings directly. Copy and paste the following into your settings.json file (changing the all CAPS inputs accordingly).
+Editing this file does a few things, telling VSCode:
+- where to look for your python executable
+- how to connect to the proxy server
+- what commands to run when opening a jupyter notebook so that the configurations translate to that setting as well
 
+Copy and paste the following template into your settings.json file. You will need to replace all the terms in brackets with the relevant information for you, including:
+
+- **PATH_TO_PYTHON**: This is the path to the main python distribution that you want to use in VSCode (you might have multiple). You should use the python version that we found above. For example, I would include `"python.pythonPath": C:\\ProgramData\\Anaconda3", `. Note: this json file needs double slashes for filepaths, so you need to add those in (not just a copy paste of the above).
+- **YOUR_HOSTNAME** and **YOUR_PORT**: this information from the Proxy settings, under "Address". A step-by-step guide of how to get this information is in the [github set-up guide](github_setup.md).
+- **YOUR_PATH_TO_PEM_FILE**: This is the path to the certificate file you just created. For example I would include, `C:\\Users\\BoydClaire\\checkpoint-inspection.finance.nycnet.pem`
+ 
 ```
 {
-    "python.pythonPath": "[path\\to\\python]", #  my version: "C:\\ProgramData\\Anaconda3"
-    "http.proxy": "http://[hostname]:[port]",
+    "python.pythonPath": "YOUR_PATH_TO_PYTHON", 
+    "http.proxy": "http://YOUR_HOSTNAME:YOUR_PORT", \\ 
     "http.proxyStrictSSL": false,
-    "terminal.integrated.env.windows": {
-      "HTTP_PROXY": "http://[hostname]:[port]",
-      "HTTPS_PROXY": "http://[hostname]:[port]",
-    },
     "http.proxyAuthorization": null,
-    "terminal.integrated.defaultProfile.windows": "Command Prompt",
     "http.proxySupport": "on",
+    "terminal.integrated.env.windows": {
+        // proxy environmental variables
+        "HTTP_PROXY": "http://YOUR_HOSTNAME:YOUR_PORT",
+        "HTTPS_PROXY": "http://YOUR_HOSTNAME:YOUR_PORT",
+        "REQUESTS_CA_BUNDLE": "YOUR_PATH_TO_PEM_FILE"
+    },
+    "jupyter.runStartupCommands": [
+        // same exact information as before - you need to replave 
+        "import os",
+        "os.environ['HTTP_PROXY'] = 'http://YOUR_HOSTNAME:YOUR_PORT'",
+        "os.environ['HTTPS_PROXY'] = 'http://YOUR_HOSTNAME:YOUR_PORT'",
+        "os.environ['REQUESTS_CA_BUNDLE'] = 'YOUR_PATH_TO_PEM_FILE'"
+    ],
 
-    # any other customizations you want (optional)
-    "workbench.colorTheme": "Visual Studio Light"
-  }
+    \\ other optional settings
+    "workbench.colorTheme": "Visual Studio Light",
+    "terminal.integrated.defaultProfile.windows": "Command Prompt" \\ I prefer it over powershell
+}
+```
+*Note:* there are multiple places where these places of information should be replaced in the json file below. Before proceeding, make sure you have changed all the CAPS text to the right side of the equals signs or colons.
+
+After we have edited the settings.json file reflecting all of your configurations, save the file and restart VSCode (either quit and re-open it or Ctrl++Shift+P to get to Command Pallette and type `Reload Window`).
+
+**Working with the shell within VSCode**
+
+*Quick important technical note:* This proxy configuration means that the terminal/shell (for powershell, command prompt, bash, etc.) within VSCode is set up with these configurations but **if you open one of these shells outside of VSCode, these settings will not apply**. For example, if I open a command prompt shell by just typing Command Prompt in my Windows search bar and open up a terminal that way, my proxy settings are not configured there because I am only setting then from within VSCode in the settings.json file above. 
+
+Let's see if the environmental variables I saved above are accessable in my main computer configuration by testing it out in a command prompt terminal outside of VSCode:
+
+{insert pic here}
+
+Because these variables are not saved outside of VSCode, the REQUESTS_CA_BUNDLE is returning itself back to us, without anything saved.
+
+That said, you can use any shell from VSCode by opening a terminal. When you Open VSCode, you can go to the top menu and select Terminal > New Teriminal. The default terminal that opens is what you can configure above with the "terminal.integrated.defaultProfile.windows" setting. In my case, I selected Command Prompt (cmd) so a cmd terminal will open. If I want a bash shell or a Powershell shell, I can go to the right side of my terminal in VSCode and click on the dropdown menu next to the `+` option. From there, I can click on any shell scripting language (bash, powershell, R, etc.).
+
+Using command prompt within VSCode and after restarting the app with the settings.json file we just configured, let's try the same command again:
+
+{insert pic here}
+
+It worked! I'm getting a real value back. This is proof that from within VSCode you can save any environmental variables to this setting file and it will be recognized by any shell from within VSCode. 
+
+The reason we have done it this way is to simplify the set-up process, without needing to add a bunch of global environmental variables using the [point and click interface with Windows](https://superuser.com/questions/949560/how-do-i-set-system-environment-variables-in-windows-10), which is a bit less replicable and harder to debug when environments are slightly different.
+
+### 5. Configure pip with the proxy server
+
+Now that Python and VSCode are installed, the last major step is to configure a package installer for Python with the proxy server so that you can install any packages you need for your work through the stable, secure internet connection via the proxy. There are a few different package installers  (pip, homebrew, conda) that can all be configured with proxy settings. 
+
+**What is pip?**
+
+**pip** is the package installer for Python. It connects to the Python Package Index (PyPI) or other specified repositories to download and install libraries that extend Python’s functionality—such as for data analysis, web development, or machine learning. When you run a command like `pip install pandas`, pip fetches the package and its dependencies over HTTPS, then installs them into your Python environment so they can be imported in your code.  Learn more in the [pip user guide](https://pip.pypa.io/en/stable/user_guide/). Pip relies on internet access and trusted SSL certificates, which means it requires some special configuration because we are working behind a proxy server.
+
+Pip should be installed once you have Python, especially if you are getting it from an Anaconda distribution.  We prefer pip because it is native to the Anaconda python distribution and is much faster/lightweight than conda. 
+
+To make sure pip is installed, first check the version of pip in a command prompt terminal:
+
+```
+pip --version
 ```
 
-After we have added this to settings.json, save the file and restart VSCode (either quit and re-open it or Ctrl++Shift+P to get to Command Pallette and type `Reload Window`).
+If you get an error and do not have pip installed, you can use the following command to ensure pip is installed with the `ensurepip` module that is built-in to python.
 
-This does a few things:
-- tells VSCode where to look for your python executable
-- tells VSCode how to connect to the proxy server, in order to download relevant extensions (e.g. Jupyter, GitHub, etc.)
-
-
-### 5. Configure pip and git with the proxy server
-
-Now that we have python and VSCode downloaded and installed, we can configure our tools to work with the proxy.
-
-At this point you should take stock of which of these tools you have installed. You can check by typing each of the three programs (`git`, `pip`) into the command prompt terminal:
- ```
- git
- pip
- ```
-
-If you do not have `pip` or `git` (or similarly get error messages when typing them into the terminal), then you need to install them. Explore installation instructions for github [here](https://github.com/nycdepartmentoffinance/onboarding/blob/main/github.md) or documentation for pip [here](https://pip.pypa.io/en/stable/user_guide/). Pip should be installed once you have Python, especially if you are getting it from an Anaconda distribution.  
-
-Let's configure both git and pip at once (note: this will overwrite any configs you have for either program):
-1. Download the raw file (download icon) for [this powershell script](proxy-config.ps1) and save it to your home directory. It basically sets the proxy settings for conda, pip and git all at once or can set them individually by passing in an optional argument specifying which ones to set up. 
-2. In a command prompt terminal, type the following. If you do not include the last argument, it will configure conda, git and pip all at once. This is super valuable if you already have all three installed and ready to go. For me, I want to only configure pip and git so I used the collowing command:
 ```
-powershell -ExecutionPolicy Bypass -File "proxy-config.ps1" http://[hostname]:[port] git-pip
+python -m ensurepip --upgrade
 ```
 
-### 6. Test proxy with pip
+After this is completed, ensure pip is installed and see where by running this command again (from a command prompt terminal):
+```
+pip --version
+```
+
+Now that we have pip, we can use the config command to point it to access packages through the proxy server. In the same command prompt terminal, type the following:
+```
+pip config set global.proxy YOUR_HOSTNAME:YOUR_PORT
+pip config set global.trusted-host "pypi.python.org global.trusted-host pypi.org global.trusted-host files.pythonhosted.org"
+```
 
 Now we can test the proxy configuration by trying to download a package using pip. The following should work in a command prompt terminal without any additional arguments (e.g. trusted host)
+```
+pip install pandas
+```
+
+### 6. Test setup in jupyter notebook
+
+
+
+Okay! We are almost done! 
+
+Now that we have everything set up, we can test to make sure different coding environments all are accessing the internet correctly.
+
+First, Open up VSCode
+
 ```
 pip install ipykernel jupyterlab notebook
 ```
 
-### 7. Test setup in jupyter notebook
 
-Now that we have that set up, you can set up Jupyter in order to work in notebook files. Open a new .ipynb file by going to File > New File > Jupyter Notebook.
+
+
+
+
+you can set up Jupyter in order to work in notebook files. Open a new .ipynb file by going to File > New File > Jupyter Notebook.
 
 Once the new file opens, there should be a toggle on the top right corner that says "Select Kernel". Click on that. It should have the version of python that you pointed to in the python path in settings.json listed. If it doesn't, then go to "Select Another Kernel", "Python Environments..." and then your python version (with a path to your executable) should be listed. 
 
