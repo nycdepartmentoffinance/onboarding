@@ -239,7 +239,7 @@ Let's see if the environmental variables I saved above are accessable in my main
 
 <img src="https://github.com/user-attachments/assets/6a7f07d2-8509-4556-a542-e7853bb0d8c4" width="400">
 
-Because these variables are not saved outside of VSCode, the REQUESTS_CA_BUNDLE is returning itself back to us, without any value saved.
+Because these variables are not saved outside of VSCode, the HTTP_PROXY is returning itself back to us, without any value saved.
 
 That said, you can open any kind of terminal from within VSCode with these correct configurations. When you open VSCode, you can go to the top menu and select Terminal > New Teriminal. The default terminal that opens is what you can configure above with the `"terminal.integrated.defaultProfile.windows"` setting. In my case, I selected Command Prompt (cmd) so a cmd terminal will open. If I want a bash shell or a Powershell shell, I can go to the right side of my terminal in VSCode and click on the dropdown menu next to the `+` option. From there, I can click on any shell scripting language (bash, powershell, R, etc.).
 
