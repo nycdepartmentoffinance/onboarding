@@ -237,7 +237,7 @@ This proxy configuration means that the terminal/shell (for powershell, command 
 
 Let's see if the environmental variables I saved above are accessable in my main computer configuration by testing it out in a command prompt terminal outside of VSCode:
 
-{insert pic here}
+<img src="https://github.com/user-attachments/assets/6a7f07d2-8509-4556-a542-e7853bb0d8c4" width="400">
 
 Because these variables are not saved outside of VSCode, the REQUESTS_CA_BUNDLE is returning itself back to us, without any value saved.
 
@@ -245,7 +245,7 @@ That said, you can open any kind of terminal from within VSCode with these corre
 
 Using command prompt within VSCode and after restarting the app with the settings.json file we just configured, let's try the same command again:
 
-{insert pic here}
+<img src="https://github.com/user-attachments/assets/c0fcc38f-83c5-45fe-bf95-2af6e2a4b6ad" width="400">
 
 It worked! I'm getting a real environmental variable value I want back. This is proof that from within VSCode you can save any environmental variables to this settings.json file and it will be recognized by any shell from within VSCode.
 
