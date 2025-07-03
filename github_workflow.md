@@ -79,41 +79,104 @@ Issues can vary dramatically in size and scope. You might create an issue to "ch
 
 If a task is too big (e.g. scaling a model to other boroughs), it's perfectly valid to create an issue just to scope out and break down a big project into smaller, manageable pieces. For example: figuring out what parts of the project can be functionalized, and then create issues to functionalize each part of the process.
 
-Good issues follow a simple structure: start with a descriptive title that summarizes the problem concisely, then provide a description with context about what you hope the issue will address (with as much context as you can even if it feels incomplete). The goal is to make it so clear that anyone on your team could pick up the issue and understand exactly what needs to be accomplished.
+Good issues follow a simple structure: start with a descriptive title that summarizes the problem concisely, then provide a description with context about what you hope the issue will address (with as much context as you can even if it feels incomplete). The ultimate goal is to make the task clear enough that anyone on your team could pick up the issue and understand exactly what needs to be accomplished. That said, start small to get in the hang of it.
 
-TODO -- sample issue? or link to issues in this repo?
+For example, this is [an issue](https://github.com/nycdepartmentoffinance/onboarding/issues/26) of a another guide that our team wants to write. It has a simple title and within the body of the issue it has a rough outline of some of the topics we are thinking of covering.
 
 **Try it: Create an issue**
 
-TODO -- instructions on how to add an issue, maybe something on the project project management tool
+Follow these steps to open a new issue in any repo where you have access:
+
+1. **Go to the repository**  
+   Navigate to the main page of the GitHub repo where you want to open the issue.
+
+2. **Click the “Issues” tab**  
+   At the top of the repo, click on the **Issues** tab (next to “Code” and “Pull requests”).
+
+3. **Click “New issue”**  
+   In the top-right corner of the Issues page, click the green **“New issue”** button.
+
+4. **Fill out the issue details**
+
+   - **Title**: Write a clear, short summary of the issue
+   - **Description**: Provide context—what's happening, what should happen, any steps to reproduce, screenshots, or links
+   - **Labels (optional)**: Tag the issue (e.g., `bug`, `enhancement`, `question`) to help categorize
+   - **Assignees (optional)**: Assign the issue to yourself or a teammate
+
+5. **Submit the issue**  
+   Click **“Submit new issue”** to save and post it to the repository.
 
 **Creating a branch based on an issue**
 
 When you create a branch based on an issue, everyone on your team can instantly see what you're working on and why it matters - no more guessing what "sarah-updates" or "temp-fix" branches are for. Your work stays organized because each branch has a clear purpose tied to a specific problem that needs solving, making it much easier to track progress and avoid getting sidetracked. Best of all, when you're done, the connection between the problem (issue) and solution (branch) creates a complete story that helps your team learn from each other and avoid repeating the same problems.
 
-Creating a branch based on an issue using the point-and-click interface is really simple:
+Creating a branch based on an issue using the point-and-click interface on GitHub is really simple:
 
-**On GitHub (or similar platforms):**
+1. **Go to your issue** – Open [Issue #26: "virtual env guide"](https://github.com/nycdepartmentoffinance/onboarding/issues/26)
 
-1. **Go to your issue** - Click on Issue #12: "Crime data isn't updating automatically"
+2. **Look for "Create a branch"** – On the right side of the issue page, find the **Development** section and click **"Create a branch"**
 
-2. **Look for "Create a branch"** - On the right side of the issue page, you'll see a "Development" section with a "Create a branch" link
+3. **Click and customize** – GitHub will suggest a name like `26-virtual-env-guide`. You can rename it to something you prefer, or keep the default name.
 
-3. **Click and customize** - GitHub will suggest a branch name like `12-crime-data-isnt-updating-automatically`. You can shorten this to something like `fix-crime-data-issue-12`
+4. **Create the branch** – Click **"Create branch"** so that GitHub creates a copy of your project and names it accordingly.
 
-4. **Choose where to work** - Select whether you want to work locally on your computer or in the web editor
+5. **Checkout the branch locally** – Once you create the branch, GitHub will tell you how to checkout the branch on your local machine. First, you would need to navigate to the local version of the repository on your machine in a terminal. In this case, to start working on the branch you just created, you would type in the following:
+   ```
+   git fetch origin
+   git checkout 26-virtual-env-guide
+   ```
 
-5. **Create the branch** - Click "Create branch" and you're ready to start working
+**Work in the branch**
 
-**What happens automatically:**
+Once your branch is created, do the work described in the issue:
 
-- The branch gets linked to the issue
-- Your branch name follows good naming conventions
-- When you later create a pull request from this branch, it will automatically reference the issue
-- Progress gets tracked in one place
+- Write or update code
+- Clean data or adjust queries
+- Add tests, comments, or documentation
 
-**The beauty of this approach**: You never have to remember issue numbers or type branch names manually. The platform handles the connection between your issue and your workspace, making collaboration seamless.
+As you work, make regular commits to save your progress.
 
-## Pull Requests
+```bash
+# Save your changes and describe them
+git add .
+git commit -m "Fix test command error on Windows"
+```
 
-TODO -- putting it all together
+Once you have completed the task outlined in the issue or are ready for someone else to review your code or collaborate with you on the task, it's time to open a pull request.
+
+## Pull Request
+
+A **pull request** (often called a “PR”) is how you ask to merge your changes from your branch into the main project. It’s like saying, _“I’ve finished this piece of work—can someone take a look and make sure it’s good to go before merging back with the main project?”_
+
+Behind the scenes, a pull request compares the work you did on your branch to the current version of the `main` branch. It shows exactly what you changed, and gives your teammates a chance to:
+
+- Review the code or content
+- Ask questions or suggest edits
+- Confirm that everything works as expected
+
+This is a critical quality-check step. It keeps the project stable, encourages collaboration, and helps everyone stay informed about changes before they go live.
+
+### How to open a pull request:
+
+1. When you’re done working on your branch, go to the repository
+2. GitHub will often show a **“Compare & pull request”** button at the top—click it  
+   _Or:_ go to the **Pull requests** tab and click **“New pull request”**
+3. Choose your branch as the “compare” branch, and `main` as the “base” branch
+4. Fill out:
+   - **Title**: Match the issue or describe the change
+   - **Description**: What did you do? Why? Anything reviewers should know?
+   - Add reviewers or tags as needed
+5. Click **“Create pull request”**
+
+Now your work is up for review and can be discussed, tested, and ultimately merged into the main codebase.
+
+### Merge to main
+
+Once the code changes are reviewed and everything is good to merge back into the `main` branch of the project, you can click on the **“Merge”** button on the pull request screen.
+
+After this completes, there will be an option to close the branch. This is helpful because it does a few things:
+
+- **closes the branch** of work that have already been incorporated into the main project version so are no longer needed (are just extra copies of the project that are not being worked on)
+- **marks the issue(s) that is linked to the branch as "Closed"**, so that your progress on the to-do task item of the issue is tracked and marked as completed in your workflow.
+
+Congrats! You have now mastered the GitHub workflow!
