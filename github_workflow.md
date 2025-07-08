@@ -18,6 +18,14 @@ This guide walks you through these core features of git, covering:
 
 6. **How to open a pull request** — and how to use it to merge work into the main branch of the project
 
+For more visual descriptions of this process, explore the resources from sessions at the [Analytics Exchange Learning Summit 2021](https://cityshare.nycnet/content/anex/pages/anex-learning-summit-2021):
+
+- *Git With It:* Introduction to Git and GitHub
+- *GitHub 102:* Working as a collaborative team on GitHub
+
+*Note: the Anex link only works on city machines because it is on an internally hosted site.*
+
+
 ## Branches
 
 Imagine you're working on a new draft of an existing word document. Instead of editing the original directly, you make a copy, work on your version, and only bring it back when it's complete. You might want to do this if you want to make sure that you can go back to the old version if you decide you don't like your changes or want to keep components of the old version as it is.
