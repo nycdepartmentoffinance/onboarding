@@ -17,7 +17,8 @@ This guide walks you through these core features of git, covering:
 5. **What a pull request is** — and how it brings everything together for review
 
 6. **How to open a pull request** — and how to use it to merge work into the main branch of the project
-
+<br></br>
+#### AnEx 2021 Learning Summit Materials
 For more visual descriptions of this process, explore the resources from sessions at the [Analytics Exchange Learning Summit 2021](https://cityshare.nycnet/content/anex/pages/anex-learning-summit-2021):
 
 - *Git With It:* Introduction to Git and GitHub
