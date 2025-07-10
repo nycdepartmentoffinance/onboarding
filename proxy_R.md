@@ -1,4 +1,4 @@
-# Proxy Set-up in R
+# Proxy set-up for R
 
 To use the proxy, you'll need to do a few things to make sure that your R sessions are configured correctly to connect to the internet and can connect to our DOF databases correctly and securely.
 
