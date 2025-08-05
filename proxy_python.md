@@ -206,7 +206,7 @@ Copy and paste the following template into your newly opened `settings.json` fil
         "REQUESTS_CA_BUNDLE": "YOUR_PATH_TO_PEM_FILE"
     },
     "jupyter.runStartupCommands": [
-        // same exact information as before - you need to replave
+        // same exact information as before - you need to replace
         "import os",
         "os.environ['HTTP_PROXY'] = 'http://YOUR_HOSTNAME:YOUR_PORT'",
         "os.environ['HTTPS_PROXY'] = 'http://YOUR_HOSTNAME:YOUR_PORT'",
