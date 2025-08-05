@@ -203,14 +203,19 @@ Copy and paste the following template into your newly opened `settings.json` fil
         // proxy environmental variables
         "HTTP_PROXY": "http://YOUR_HOSTNAME:YOUR_PORT",
         "HTTPS_PROXY": "http://YOUR_HOSTNAME:YOUR_PORT",
-        "REQUESTS_CA_BUNDLE": "YOUR_PATH_TO_PEM_FILE"
+        "REQUESTS_CA_BUNDLE": "YOUR_PATH_TO_PEM_FILE",
+        "SSL_CERT_FILE": "YOUR_PATH_TO_PEM_FILE"
     },
     "jupyter.runStartupCommands": [
         // same exact information as before - you need to replace
         "import os",
         "os.environ['HTTP_PROXY'] = 'http://YOUR_HOSTNAME:YOUR_PORT'",
         "os.environ['HTTPS_PROXY'] = 'http://YOUR_HOSTNAME:YOUR_PORT'",
-        "os.environ['REQUESTS_CA_BUNDLE'] = 'YOUR_PATH_TO_PEM_FILE'"
+        "os.environ['REQUESTS_CA_BUNDLE'] = 'YOUR_PATH_TO_PEM_FILE'",
+        "os.environ['SSL_CERT_FILE'] = 'YOUR_PATH_TO_PEM_FILE'",
+        "! pip install truststore",
+        "import truststore",
+        "truststore.inject_into_ssl()"
     ],
 
     // other optional settings
