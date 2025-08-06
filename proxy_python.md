@@ -204,7 +204,7 @@ If there is anything in the `settings.json` file already, delete it. Then, copy 
         "HTTP_PROXY": "http://YOUR_HOSTNAME:YOUR_PORT",
         "HTTPS_PROXY": "http://YOUR_HOSTNAME:YOUR_PORT",
         "REQUESTS_CA_BUNDLE": "YOUR_PATH_TO_PEM_FILE",
-        "SSL_CERT_FILE": "YOUR_PATH_TO_PEM_FILE"
+        "UV_NATIVE_TLS": "TRUE",
     },
     "jupyter.runStartupCommands": [
         // same exact information as before - you need to replace
@@ -212,7 +212,7 @@ If there is anything in the `settings.json` file already, delete it. Then, copy 
         "os.environ['HTTP_PROXY'] = 'http://YOUR_HOSTNAME:YOUR_PORT'",
         "os.environ['HTTPS_PROXY'] = 'http://YOUR_HOSTNAME:YOUR_PORT'",
         "os.environ['REQUESTS_CA_BUNDLE'] = 'YOUR_PATH_TO_PEM_FILE'",
-        "os.environ['SSL_CERT_FILE'] = 'YOUR_PATH_TO_PEM_FILE'",
+        "os.environ['UV_NATIVE_TLS'] = 'TRUE'",
         "! pip install truststore",
         "import truststore",
         "truststore.inject_into_ssl()"
