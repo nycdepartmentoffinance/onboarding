@@ -30,9 +30,96 @@ All that to say, we recommend using `uv` because it combines environment creatio
 
 Let's walk through an actual example of how this works in practice, using `uv` (but this general philosophy will work across the other options as well).
 
+First, open up VSCode and open a new or existing project folder (Open Folder > ...). Once you are in a project folder that you want to create a virtual environment for, we can get started.
+
+### Installation
+
+Now, we need to open up a terminal to install uv and specify what packages we want to add to our environment. Open a terminal by clicking on Terminal > New Terminal. This will open up a CommandPrompt (cmd) terminal.
+
+To install `uv`, type the following command:
+```cmd
+pip install uv
+```
+
+If this doesn't work or you are working with a different type of machine or terminal, you can explore different [installation options](https://docs.astral.sh/uv/getting-started/installation/) that uv provides. For example, if you don't have pip set up, there is a command listed to run a line of code from a PowerShell terminal to download uv as well.
+
+To make sure that uv is installed properly you can type the following into your terminal:
+```
+uv
+```
+
+You should see the following response:
+```
+error: 'uv' requires a subcommand but one was not provided
+  [subcommands: run, init, add, remove, version, sync, lock, export, tree, tool, python, pip, venv, virtualenv, v, build, publish, build-backend, cache, self, clean, generate-shell-completion, --generate-shell-completion, help]
+
+Usage: uv [OPTIONS] <COMMAND>
+
+For more information, try '--help'.
+```
+
+This means that uv is installed correctly and we're ready to start building our virtual environment.
+
+### Initialization with python
+
+One thing that is so awesome about `uv` is that you can install python versions directly using it. 
+
+For example, say I want this project to have python 3.12. Let's start by using uv to download that version of python:
+```
+uv python install 3.12
+```
+
+This may take 3-4 minutes, but it is much faster than downloading it in other ways -- and uv will automatically add the python executable to your PATH, so you don't need to worry about it.
+
+To check what versions of python are visible to uv (both on your machine already and those available to download), you can use the following command:
+```
+uv python list
+```
+
+Now that we have a working version of python downloaded that uv can use, let's starting building our virtual environment, also called "initializing" our environment. Because our terminal in VSCode is already located within the project folder we want to create a virtual environment for, we can use the following command:
+```
+uv init
+```
+
+Within your folder, `uv` will have created the following files:
+```
+[your project folder]
+├── .gitignore
+├── .python-version
+├── README.md
+├── main.py
+└── pyproject.toml
+```
+
+The main.py file contains a simple "Hello world" program. Try it out with `uv run`:
+```bash
+uv run main.py
+# Hello from [your folder name here]!
+```
+
+## Project Structure
+
+***NOTE:** This part of the guide is taken directly from the [uv documentation](https://docs.astral.sh/uv/guides/projects/#project-structure). All credit goes to the developers of uv!*
+
+A project consists of a few important parts that work together and allow uv to manage your project. In addition to the files created by `uv init`, uv will create a virtual environment and `uv.lock` file in the root of your project the first time you run a project command, i.e., `uv run`, `uv sync`, or `uv lock`.
+
+A complete listing would look like:
+```
+.
+├── .venv
+│   ├── bin
+│   ├── lib
+│   └── pyvenv.cfg
+├── .python-version
+├── README.md
+├── main.py
+├── pyproject.toml
+└── uv.lock
+```
 
 
-First, open up VSCode and open a new or existing project folder.
+
+
 
 
 
@@ -43,7 +130,7 @@ Let's look at a quick example
 
 
 
-
+### Adding packages
 
 
 
@@ -52,6 +139,13 @@ A lock file can be generated to record the exact versions currently in use, whic
 In effect, the virtual environment acts as a filter between your project and the rest of your system: any tool or library request first checks the environment’s folder, so the project always uses its own defined setup regardless of what is installed elsewhere.
 
 
+### Building an environment from an existing .toml file
+
+
+
+
+###
+
 
 why its helpful to use/what problem its solving
 
@@ -59,13 +153,6 @@ why its helpful to use/what problem its solving
 
 explanation of the list of packages (.toml, .lock, to env situation)
 
-## Types of virtual environments  
-
-why we are using uv
-
-## `uv` installation process and set-up
-
-how to install uv / what settings you need in place to work with the proxy server
 
 ## Using `uv`
 
