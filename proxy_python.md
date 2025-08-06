@@ -190,7 +190,7 @@ Editing this file does a few things, including telling VSCode:
 - how to connect to the proxy server
 - what commands to run when opening a jupyter notebook so that the configurations translate to that setting as well
 
-Copy and paste the following template into your newly opened `settings.json` file.
+If there is anything in the `settings.json` file already, delete it. Then, copy and paste the following template into your newly opened `settings.json` file:
 
 ```
 {
@@ -226,11 +226,13 @@ Copy and paste the following template into your newly opened `settings.json` fil
 
 Next, you will need to replace all the terms in ALL_CAPS with the relevant information for you, including:
 
-- **PATH_TO_PYTHON**: This is the path to the main python distribution that you want to use in VSCode (you might have multiple). You should use the python version that we found above. For example, I would include `"C:\\ProgramData\\Anaconda3"`. Note: this json file needs double slashes for filepaths, so you need to add those in (not just a copy paste of the above).
+- **PATH_TO_PYTHON**: This is the path to the main python distribution that you want to use in VSCode (you might have multiple). You should use the python version that we found above. For example, I would include `"C:/ProgramData/Anaconda3"`. Note: this json file needs double slashes for filepaths, so you need to add those in (not just a copy paste of the above).
 - **YOUR_HOSTNAME** and **YOUR_PORT**: this information from the Proxy settings, under "Address".
-- **YOUR_PATH_TO_PEM_FILE**: This is the path to the certificate file you just created. For example I would include, `"C:\\Users\\BoydClaire\\trusted_certs.pem"`
+- **YOUR_PATH_TO_PEM_FILE**: This is the path to the certificate file you just created. For example I would include, `"C:/Users/BoydClaire/trusted_certs.pem"`
 
-_Note:_ there are multiple places where these places of information should be replaced in the json file below. Before proceeding, make sure you have changed all the CAPS text to the right side of the equals signs or colons to your relevant information.
+Common errors you might come across:
+- There are multiple places where these places of information should be replaced in the json file below. Before proceeding, make sure you have changed all the CAPS text to the right side of the equals signs or colons to your relevant information.
+- If you copy and paste the filepath from your File Explorer your file path will use `\\` instead of `/`. This will not work correctly. Make sure that the filepath uses forward slashes (`/`) instead.
 
 After we have edited the `settings.json` file reflecting all of your configurations, save the file and **restart VSCode** (either quit and re-open it or Ctrl++Shift+P to get to Command Pallette and type `Reload Window`).
 
