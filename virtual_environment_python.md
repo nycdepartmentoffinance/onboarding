@@ -1,6 +1,6 @@
 # Virtual Environments in Python
 
-Have you ever tried to run someone else's code and hit errors that you have a different version of a python package or even python itself? 
+Have you ever tried to run someone else's code and hit errors that you have a different version of a python package or even python itself?
 
 For example, imagine one project needs pandas version 1.3.5 while another needs version 2.0.0. If you install pandas globally, installing one version will overwrite the other. This can make it impossible for both projects to work correctly on the same machine.
 
@@ -15,28 +15,30 @@ In short, using virtual environments for each project allows programmers to more
 ## How do you create one?
 
 Just like there are different ways to import libraries in python (pip, homebrew, etc), there are a few different tools -- both built-in tools and importable libraries -- that you can use to create virtual environments. Here are a few examples:
-- `venv`: This is the simplest option to create a virtual environment because it is a built-in python tool, so it comes pre-installed with any version of python. That said, it does not manage dependencies so it can be much harder to maintain.
-- `conda`: A popular environment and package manager that works not only with Python but also with other languages and tools. It creates isolated environments and manages dependencies, including non-Python libraries, which is especially useful for data science and scientific computing. 
-- `poetry`: A modern and popular dependency manager that handles virtual environments, packaging, and publishing. 
-- `uv`: This is a newer, fast, and lightweight package manager written in Rust. It combines environment creation, dependency resolution, and installation into a single step. 
 
-In short, there are pros and cons to all of the above approaches. Conda is more widely used but remarkably slow, venv is built-in but requires a lot of manual dependency maintenance, and poetry is great for package dependencies but does not have functionality to specify which python version to use for the project. 
+- `venv`: This is the simplest option to create a virtual environment because it is a built-in python tool, so it comes pre-installed with any version of python. That said, it does not manage dependencies so it can be much harder to maintain.
+- `conda`: A popular environment and package manager that works not only with Python but also with other languages and tools. It creates isolated environments and manages dependencies, including non-Python libraries, which is especially useful for data science and scientific computing.
+- `poetry`: A modern and popular dependency manager that handles virtual environments, packaging, and publishing.
+- `uv`: This is a newer, fast, and lightweight package manager written in Rust. It combines environment creation, dependency resolution, and installation into a single step.
+
+In short, there are pros and cons to all of the above approaches. Conda is more widely used but remarkably slow, venv is built-in but requires a lot of manual dependency maintenance, and poetry is great for package dependencies but does not have functionality to specify which python version to use for the project.
 
 All that to say, we recommend using `uv` because it combines environment creation, python versioning and dependency management into a single, fast workflow. It’s written in Rust, which makes it significantly faster than traditional tools (especially conda), and it handles dependency resolution in a way that is both predictable and reproducible. uv also plays nicely with network restrictions and proxy settings, which is important for working in our city environment. This means we can set up, share, and rebuild environments quickly and reliably without extra manual steps.
 
-## How does this actually work 
+## How does this actually work
 
-***NOTE:** This part of the guide assumes you've already been through the [proxy guide in python](proxy_python.md) and have the correct proxy configuration, including all the settings.json set-up. If this doesn't sound familiar, head over to that guide first.*
+**\*NOTE:** This part of the guide assumes you've already been through the [proxy guide in python](proxy_python.md) and have the correct proxy configuration, including all the settings.json set-up. If this doesn't sound familiar, head over to that guide first.\*
 
 Let's walk through an actual example of how this works in practice, using `uv` (but this general philosophy will work across the other options as well).
 
-First, open up VSCode and open a new or existing project folder (Open Folder > ...). Once you are in a project folder that you want to create a virtual environment for, we can get started.
+First, open up VSCode and open a new or existing project folder (Open Folder > ...). Once you are in a project folder that you want to create a virtual environment for, we can get started. For this example, I am using the folder 'uv_test'.
 
 ### Installation
 
 Now, we need to open up a terminal to install uv and specify what packages we want to add to our environment. Open a terminal by clicking on Terminal > New Terminal. This will open up a CommandPrompt (cmd) terminal.
 
 To install `uv`, type the following command:
+
 ```cmd
 pip install uv
 ```
@@ -44,11 +46,13 @@ pip install uv
 If this doesn't work or you are working with a different type of machine or terminal, you can explore different [installation options](https://docs.astral.sh/uv/getting-started/installation/) that uv provides. For example, if you don't have pip set up, there is a command listed to run a line of code from a PowerShell terminal to download uv as well.
 
 To make sure that uv is installed properly you can type the following into your terminal:
+
 ```
 uv
 ```
 
 You should see the following response:
+
 ```
 error: 'uv' requires a subcommand but one was not provided
   [subcommands: run, init, add, remove, version, sync, lock, export, tree, tool, python, pip, venv, virtualenv, v, build, publish, build-backend, cache, self, clean, generate-shell-completion, --generate-shell-completion, help]
@@ -62,9 +66,10 @@ This means that uv is installed correctly and we're ready to start building our 
 
 ### Initialization with python
 
-One thing that is so awesome about `uv` is that you can install python versions directly using it. 
+One thing that is so awesome about `uv` is that you can install python versions directly using it.
 
 For example, say I want this project to have python 3.12. Let's start by using uv to download that version of python:
+
 ```
 uv python install 3.12
 ```
@@ -72,18 +77,23 @@ uv python install 3.12
 This may take 3-4 minutes, but it is much faster than downloading it in other ways -- and uv will automatically add the python executable to your PATH, so you don't need to worry about it.
 
 To check what versions of python are visible to uv (both on your machine already and those available to download), you can use the following command:
+
 ```
 uv python list
 ```
 
 Now that we have a working version of python downloaded that uv can use, let's starting building our virtual environment, also called "initializing" our environment. Because our terminal in VSCode is already located within the project folder we want to create a virtual environment for, we can use the following command:
+
 ```
-uv init
+uv init --python 3.11
 ```
 
+You can use `uv init` without the python argument, but it's helpful to start by intentionally deciding which python environment you want to use. If you do not have that version of python installed, uv will install it for you.
+
 Within your folder, `uv` will have created the following files:
+
 ```
-[your project folder]
+uv_test
 ├── .gitignore
 ├── .python-version
 ├── README.md
@@ -92,79 +102,167 @@ Within your folder, `uv` will have created the following files:
 ```
 
 The main.py file contains a simple "Hello world" program. Try it out with `uv run`:
+
 ```bash
 uv run main.py
-# Hello from [your folder name here]!
+# Hello from uv-test!
 ```
+
+This command runs the main.py script, using the version of python that you indicated. Great! The start to our virtual environment has begun!
 
 ## Project Structure
 
-***NOTE:** This part of the guide is taken directly from the [uv documentation](https://docs.astral.sh/uv/guides/projects/#project-structure). All credit goes to the developers of uv!*
+**\*NOTE:** This part of the guide is adapted directly from the [uv documentation](https://docs.astral.sh/uv/guides/projects/#project-structure). All credit goes to the developers of uv!\*
 
-A project consists of a few important parts that work together and allow uv to manage your project. In addition to the files created by `uv init`, uv will create a virtual environment and `uv.lock` file in the root of your project the first time you run a project command, i.e., `uv run`, `uv sync`, or `uv lock`.
+Let's start to dig a bit more into what happens when you initialize a uv environment by exploring one of the files that gets created when you initialize an environment: `pyproject.toml`.
 
-A complete listing would look like:
+### `pyproject.toml`
+
+The `pyproject.toml` contains metadata about your project, including the project name, version and dependencies:
+
+```toml
+# pyproject.toml
+
+[project]
+name = "uv-test"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = []
 ```
-.
-├── .venv
-│   ├── bin
+
+In short, this is the list of instructions of how we would like our environment built. We can see immediately that the python version we used to initialize our environment is stored here in the `requires-python` variable.
+
+When we initialize a virtual environment, we start with no listed dependencies -- the `dependencies` variable is an empty list. As we add packages to our virtual environment, this toml file will automatically update.
+
+Let's try it. Say we are working on a standard data analysis task and we want to us pandas and geopandas. I can use the following commands to add those packages to my virtual environment by doing the following:
+
+```bash
+uv add pandas geopandas
+```
+
+What this is doing is basically downloading and installing these packages into our virtual environment, more or less the same as `pip install pandas` but specific to this project only.
+
+Now, let's check out our `pyproject.toml` file:
+
+```toml
+# pyproject.toml
+
+[project]
+name = "uv-test"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "geopandas>=1.1.1",
+    "pandas>=2.3.1",
+]
+```
+
+It now contains pandas and geopandas as listed dependencies. A few more things changed in our project folder when we did this. Let's take a look at the new files that were created:
+
+```bash
+uv_test
+├── .venv           // new folder
+│   ├── Scripts     // or bin if on macOS/linux
 │   ├── lib
 │   └── pyvenv.cfg
 ├── .python-version
 ├── README.md
 ├── main.py
 ├── pyproject.toml
-└── uv.lock
+└── uv.lock         // new file
 ```
 
+### `.venv`
 
+The `.venv` folder contains your project's virtual environment, a Python environment that is isolated from the rest of your system. This is where uv will install your project's dependencies. There are two main folders here with important information:
 
+- `.venv/Scripts`: this folder contains executables like python.exe that allow you to run the python version relevant to this particular project. Often this is a redirect to another filepath on your system that already contains this python executable, but if you don't have that version of python installed, it could be a downloaded version.
+- `.venv/lib`: this folder is where all the packages you add to the virtual environment are saved. There will be relevant folders for the packages you explicitly name in your .toml file (e.g. pandas and geopandas) as well as all the packages needed for those packages to run (e.g. numpy, pyproj, shapely, etc.)
 
+See the [project environment](https://docs.astral.sh/uv/concepts/projects/layout/#the-project-environment) documentation for more details.
 
+### `uv.lock`
 
+`uv.lock` is a cross-platform lockfile that contains exact information about your project's dependencies. Unlike the pyproject.toml which is used to specify the broad requirements of your project (think of it like a general list of instructions -- go from home to work), the lockfile contains the exact resolved versions that are installed in the project environment (think of it like a detailed list of how to execute your instructions -- leave your house, walk to the street, turn left, walk 5 blocks, take a right, enter the subway, etc.).
 
+The lockfile is **automatically created and updated** when you add or update your virtual environment, and **should not be edited manually**. It uses the pyproject.toml file as a guide to build itself.
 
-In a modern workflow, the environment’s dependencies are declared in a file—often a `pyproject.toml` for Python—that lists what packages the project requires. Let's say you want to create a virtual environment that uses has pandas, geopandas and 
+That said, you can delete/replace the lock file easily as long as you have the toml file. Try this out -- delete the `uv.lock` file from your directory:
 
-Let's look at a quick example
+```bash
+rm uv.lock
+```
 
+The `uv.lock` file is gone now, but let's build it:
 
+```bash
+uv sync
+```
 
-### Adding packages
+In this case, `uv` builds the lock file back from the `pyproject.toml` file effortlessly and quickly.
 
+See the lockfile documentation for more details.
 
+uv.lock is a universal or cross-platform lockfile that captures the packages that would be installed across all possible Python markers such as operating system, architecture, and Python version.
 
-A lock file can be generated to record the exact versions currently in use, which ensures that the same versions can be installed again in the future. The actual tools and libraries are stored in the environment’s directory (for Python, typically a .venv folder), which can be deleted and rebuilt from the dependency list at any time.
+### Using the virtual environment
 
-In effect, the virtual environment acts as a filter between your project and the rest of your system: any tool or library request first checks the environment’s folder, so the project always uses its own defined setup regardless of what is installed elsewhere.
+There are three ways that you can use the uv virtual environment, two from the command line and one using jupyter notebooks.
 
+#### **1. Using `uv run`**
 
-### Building an environment from an existing .toml file
+If you want to run a script, command, or Python shell using the virtual environment, the easiest way is:
 
+```
+uv run python your_script.py
+```
 
+This will build the virtual environment, and then use that environment to run the script itself. The pros of this approach is that it's really quick but can be harder to debug depending on what you're building.
 
+#### **2. Spanning a terminal from within the virtual environment**
 
-###
+Instead of letting uv span the virtual environment on its own, you can do that manually.
 
+In a Command Prompt terminal, you can run the following (assuming you are on a Windows machine):
 
-why its helpful to use/what problem its solving
+```
+.venv\Scripts\activate
+```
 
+This span a terminal that uses all the defaults that are specified in your .toml file.
 
+When you are ready to exit the environment, you can use the following command:
 
-explanation of the list of packages (.toml, .lock, to env situation)
+```
+deactivate
+```
 
+#### **3. Using jupyter notebooks in VSCode and selecting the virtual environment as your kernel**
 
-## Using `uv`
+In order to use jupyter notebooks most easily, you need to add one more package to your virtual environment:
 
-how to create a new env with uv (init, add packages)
+```
+uv add ipykernel
+```
 
-how to use an existing repo/env
+Next, you can use the virtual environment in notebooks by using the following steps:
+
+1. Open any `.ipynb` file within your project folder
+2. In the top-right corner of the notebook, click on Select Kernel (usually shows a Python interpreter name).
+3. Look for the `.venv` environment in the list.
+
+You can proceed as normal, and all the packages you have downloaded will be available in the notebook.
+
+**Note:** If you are working and need to add a new package you can do the following:
+
+1. In your console, use the command: `uv add PACKAGE_NAME`
+2. Restart your kernel
+3. import the new package as needed
 
 ## What to keep (or not keep) in version control
 
-everything can be built from the toml file
-
-.toml - yes
-.lock - no
-.venv/ folder - no
-
+Given the process described above, the most important file to keep in version control is `pyproject.toml`. Both the `.venv/` folder and the `uv.lock` file can be rebuilt using this file so this is the most important file to commit to your github repository.
