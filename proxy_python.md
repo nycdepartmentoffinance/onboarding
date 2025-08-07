@@ -290,7 +290,7 @@ Now that we have pip, we can use the config command to point it to access packag
 
 ```
 pip config set global.proxy YOUR_HOSTNAME:YOUR_PORT
-pip config set global.trusted-host "pypi.python.org global.trusted-host pypi.org global.trusted-host files.pythonhosted.org"
+pip config set global.trusted-host "pypi.python.org pypi.org files.pythonhosted.org test.pypi.org"
 ```
 
 To double check that your configurations are saved you can always use the command:
