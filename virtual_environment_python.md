@@ -71,7 +71,7 @@ One thing that is so awesome about `uv` is that you can install python versions 
 For example, say I want this project to have python 3.12. Let's start by using uv to download that version of python:
 
 ```
-uv python install 3.12
+uv python install 3.11
 ```
 
 This may take 3-4 minutes, but it is much faster than downloading it in other ways -- and uv will automatically add the python executable to your PATH, so you don't need to worry about it.
