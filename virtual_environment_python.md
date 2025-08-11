@@ -204,10 +204,6 @@ uv sync
 
 In this case, `uv` builds the lock file back from the `pyproject.toml` file effortlessly and quickly.
 
-See the lockfile documentation for more details.
-
-uv.lock is a universal or cross-platform lockfile that captures the packages that would be installed across all possible Python markers such as operating system, architecture, and Python version.
-
 ### Using the virtual environment
 
 There are three ways that you can use the uv virtual environment, two from the command line and one using jupyter notebooks.
