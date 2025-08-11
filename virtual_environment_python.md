@@ -27,7 +27,7 @@ All that to say, we recommend using `uv` because it combines environment creatio
 
 ## How does this actually work
 
-**NOTE:** This part of the guide assumes you've already been through the [proxy guide in python](proxy_python.md) and have the correct proxy configuration, including all the settings.json set-up. If this doesn't sound familiar, head over to that guide first.\*
+***NOTE:** This part of the guide assumes you've already been through the [proxy guide in python](proxy_python.md) and have the correct proxy configuration, including all the settings.json set-up. If this doesn't sound familiar, head over to that guide first.*
 
 Let's walk through an actual example of how this works in practice, using `uv` (but this general philosophy will work across the other options as well).
 
@@ -111,8 +111,7 @@ uv run main.py
 This command runs the main.py script, using the version of python that you indicated. Great! The start to our virtual environment has begun!
 
 ## Project Structure
-
-**\*NOTE:** This part of the guide is adapted directly from the [uv documentation](https://docs.astral.sh/uv/guides/projects/#project-structure). All credit goes to the developers of uv!\*
+***NOTE:** This part of the guide is adapted directly from the [uv documentation](https://docs.astral.sh/uv/guides/projects/#project-structure). All credit goes to the developers of uv!*
 
 Let's start to dig a bit more into what happens when you initialize a uv environment by exploring one of the files that gets created when you initialize an environment: `pyproject.toml`.
 
