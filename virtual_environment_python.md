@@ -45,15 +45,17 @@ pip install uv
 
 If this doesn't work or you are working with a different type of machine or terminal, you can explore different [installation options](https://docs.astral.sh/uv/getting-started/installation/) that uv provides. For example, if you don't have pip set up, there is a command listed to run a line of code from a PowerShell terminal to download uv as well.
 
+**A note on existing python versions:** uv is only compatible with python versions 3.8+, so if your version of python pre-dates 3.8, we recommend installing a new version of [python](https://www.python.org/downloads/) if needed or submitting a ticket to the [City HelpDesk](https://a858-am-login.nyc.gov/nidp/saml2/sso?SAMLRequest=jVJLbxoxEP4rK9%2F3DQQsFmkLqoqUpKtAe%2BhtsAdiyWtvPN5N8u%2B7MVSkh6Jex99rvvGSoNVFx%2BveP5snfOmRfPTWakP8%2FFKx3hlugRRxAy0S94Lv6od7XiQZ75z1VljNopoInVfWrK2hvkW3QzcogT%2Be7iv27H1HPE3Fq%2FJ0nifmXSQnO6QGhg5OmEjLos3orgx8yFxJMJ%2FOY2hjbU%2FKXGlKdmmImBKN1K%2FWCQxbVOwImpBF203Fdo%2Fr2UHAcXInpCxLORWlXMBsVmawAJhkhyIfgdQAkRrwSiXqcWvIg%2FEVK7JiGmfzOC%2F3RcanOS8nyWJW%2FGJRc9n%2FizJSmdPtsg5nEPFv%2B30TN993%2ByAwKInucUT%2Ff08%2F0VHoaJRlq2WogYfM7vPxbseBPxdjqxu%2By%2FSz%2BsWr4x95t5vGaiXeo1pr%2B7p2CH7cwbsewzla8P8OkCd5mCgZHwOUYwtK11I6JGLp6uL7989c%2FQY%3D&RelayState=https%3A%2F%2Fcwitservice.nyc.gov%2Fnavpage.do&SigAlg=http%3A%2F%2Fwww.w3.org%2F2001%2F04%2Fxmldsig-more%23rsa-sha256&Signature=GqRvugLTS%2BwrVqjGmYz9O0SgX0YH5ZnNMxapylATVjVoIeMs04KlA8fJ1PicTv01X5doqA9EVBYQZgM5pw0EsIH5dzTkCQkxZ2yPrXPUzURyeVWBMT9mpEqFIqNUzlmBgmpHVe4RMP7Yc3uwdlsrxrvwpVZghyNXaVyTGvsCDxmEsco083%2BFTw9b%2FWMXeyYvvF1QYQIkqdFTeN3g77rUYcXlBwwtg47zg4e%2BQU41878LVX%2B5Zgz7Qg41SU0u3IR3XOZveymV1OaVRdq9loCcTV7SXTnAr4vGfvVeE4z9atx%2BBly0iyw6UJvLesHRB3v82ZW%2FRRwPas3FN%2Bsg%2FFZWvQ%3D%3D) to install it on your behalf. If you download uv using the powershell and not pip, you might not need to do this step at all and use uv for python installation.
+
 To make sure that uv is installed properly you can type the following into your terminal:
 
-```
+```bash
 uv
 ```
 
 You should see the following response:
 
-```
+```bash
 error: 'uv' requires a subcommand but one was not provided
   [subcommands: run, init, add, remove, version, sync, lock, export, tree, tool, python, pip, venv, virtualenv, v, build, publish, build-backend, cache, self, clean, generate-shell-completion, --generate-shell-completion, help]
 
@@ -135,7 +137,17 @@ In short, this is the list of instructions of how we would like our environment 
 
 When we initialize a virtual environment, we start with no listed dependencies -- the `dependencies` variable is an empty list. As we add packages to our virtual environment, this toml file will automatically update.
 
-Let's try it. Say we are working on a standard data analysis task and we want to us pandas and geopandas. I can use the following commands to add those packages to my virtual environment by doing the following:
+Let's try it. Say we are working on a standard data analysis task and we want to us pandas and geopandas. 
+
+#### **Quick Proxy Interlude**
+In order to download packages, we need to add a few things to the .toml file in order to work with our proxy server correctly. Append the following to the bottom of the pyproject.toml file:
+```toml
+[tool.uv]
+allow-insecure-host = ["pypi.org", "files.pythonhosted.org", "github.com"]
+```
+This will allow us to download packages successfully.
+
+Next, I can use the following commands to add those packages to my virtual environment by doing the following:
 
 ```bash
 uv add pandas geopandas
@@ -158,6 +170,9 @@ dependencies = [
     "geopandas>=1.1.1",
     "pandas>=2.3.1",
 ]
+
+[tool.uv]
+allow-insecure-host = ["pypi.org", "files.pythonhosted.org", "github.com"]
 ```
 
 It now contains pandas and geopandas as listed dependencies. A few more things changed in our project folder when we did this. Let's take a look at the new files that were created:
