@@ -27,7 +27,7 @@ All that to say, we recommend using `uv` because it combines environment creatio
 
 ## How does this actually work
 
-***NOTE:** This part of the guide assumes you've already been through the [proxy guide in python](proxy_python.md) and have the correct proxy configuration, including all the settings.json set-up. If this doesn't sound familiar, head over to that guide first.*
+**\*NOTE:** This part of the guide assumes you've already been through the [proxy guide in python](proxy_python.md) and have the correct proxy configuration, including all the settings.json set-up. If this doesn't sound familiar, head over to that guide first.\*
 
 Let's walk through an actual example of how this works in practice, using `uv` (but this general philosophy will work across the other options as well).
 
@@ -117,7 +117,8 @@ This command runs the main.py script, using the version of python that you indic
 It is cool to note that using the command `uv init` also initializes a git repository if one is not already initialized in that project directory. For more on git, check out the [GitHub Set-up Guide](github_setup.md) and [GitHub Workflow Guide](github_workflow.md).
 
 ## Project Structure
-***NOTE:** This part of the guide is adapted directly from the [uv documentation](https://docs.astral.sh/uv/guides/projects/#project-structure). All credit goes to the developers of uv!*
+
+**\*NOTE:** This part of the guide is adapted directly from the [uv documentation](https://docs.astral.sh/uv/guides/projects/#project-structure). All credit goes to the developers of uv!\*
 
 Let's start to dig a bit more into what happens when you initialize a uv environment by exploring one of the files that gets created when you initialize an environment: `pyproject.toml`.
 
@@ -141,14 +142,17 @@ In short, this is the list of instructions of how we would like our environment 
 
 When we initialize a virtual environment, we start with no listed dependencies -- the `dependencies` variable is an empty list. As we add packages to our virtual environment, this toml file will automatically update.
 
-Let's try it. Say we are working on a standard data analysis task and we want to us pandas and geopandas. 
+Let's try it. Say we are working on a standard data analysis task and we want to us pandas and geopandas.
 
 #### **Quick Proxy Interlude**
+
 In order to download packages, we need to add a few things to the .toml file in order to work with our proxy server correctly. Append the following to the bottom of the pyproject.toml file:
+
 ```toml
 [tool.uv]
 allow-insecure-host = ["pypi.org", "files.pythonhosted.org", "github.com"]
 ```
+
 This will allow us to download packages successfully.
 
 Next, I can use the following commands to add those packages to my virtual environment by doing the following:
@@ -241,13 +245,13 @@ This will build the virtual environment, and then use that environment to run th
 
 Instead of letting uv span the virtual environment on its own, you can do that manually.
 
-In a Command Prompt terminal, you can run the following (assuming you are on a Windows machine):
+In a Command Prompt terminal, you can run the following (assuming you are on a Windows machine, it's `source .venv\bin\activate` on a linux/macOS):
 
 ```
-.venv\Scripts\activate
+.venv\Scripts\activate.bat
 ```
 
-This span a terminal that uses all the defaults that are specified in your .toml file.
+This span a terminal that uses all the defaults that are specified in your .toml file. You'll know it was successful if you see the name of the environment in parenthesis:
 
 When you are ready to exit the environment, you can use the following command:
 
