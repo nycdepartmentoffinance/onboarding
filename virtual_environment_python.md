@@ -92,6 +92,8 @@ uv init --python 3.11
 
 You can use `uv init` without the python argument, but it's helpful to start by intentionally deciding which python environment you want to use. If you do not have that version of python installed, uv will install it for you.
 
+Using `uv init` will initialize the virtual environment, defaulting to using the name of the project folder. In my case using the example above, the project folder is `uv_test`, so the virtual environment will be called that. If you want to only use uv for creating a virtual environment in the typical python  built-in `venv` approach, you can use `uv venv project-name` to do that. If you decide to take that approach, read [the documentation](https://docs.astral.sh/uv/pip/environments/) on the tradeoffs between the two approaches.
+
 Within your folder, `uv` will have created the following files:
 
 ```
@@ -251,36 +253,62 @@ In a Command Prompt terminal, you can run the following (assuming you are on a W
 .venv\Scripts\activate.bat
 ```
 
-This span a terminal that uses all the defaults that are specified in your .toml file. You'll know it was successful if you see the name of the environment in parenthesis:
+This span a terminal that uses all the defaults that are specified in your .toml file. You'll know it was successful if you see the name of the environment (in my case uv-test) in parentheses:
+
+<img width="331" height="31" alt="Screenshot 2025-08-14 at 11 50 58 AM" src="https://github.com/user-attachments/assets/aa08d22c-581a-44d6-9488-671a08c0a99e" />
+
+When you are within the environment like this, you could run the same python script this way:
+```
+python -m your_script.py
+```
+This is what is returned to me if I try to run main, like I did before using `uv run python main.py`:
+
+<img width="388" height="32" alt="Screenshot 2025-08-14 at 11 53 37 AM" src="https://github.com/user-attachments/assets/103c5c16-b822-478e-adf4-1e14b3233df3" />
+
+The virtual environment maintained by `uv` has all your dependencies already downloaded, so you can just assume that is taken care of.
 
 When you are ready to exit the environment, you can use the following command:
-
 ```
 deactivate
 ```
+You'll know you are out of the environment when you lose the environment name within the parentheses, like the following:
+
+<img width="388" height="32" alt="Screenshot 2025-08-14 at 11 53 37 AM" src="https://github.com/user-attachments/assets/debae458-233d-472f-ba22-b5ff25d62ae4" />
 
 #### **3. Using jupyter notebooks in VSCode and selecting the virtual environment as your kernel**
 
-In order to use jupyter notebooks most easily, you need to add one more package to your virtual environment:
+`uv` is compatible with using Jupyter notebooks, as documented in their [Using uv with Jupyter](https://docs.astral.sh/uv/guides/integration/jupyter/) guide.
+
+We like using Jupyter notebooks within VSCode as it is the easiest way in our opinion to get the best of system set-up with the settings.json file, github integration, and more. For more on VSCode and that set-up, explore our [proxy configuration in python](proxy_python.md) guide.
+
+In order to use jupyter notebooks within VSCode most easily, you need to add one more package to your virtual environment:
 
 ```
-uv add ipykernel
+uv add --dev ipykernel
 ```
 
 Next, you can use the virtual environment in notebooks by using the following steps:
 
-1. Open any `.ipynb` file within your project folder
+1. Create or open any `.ipynb` file within your project folder
 2. In the top-right corner of the notebook, click on Select Kernel (usually shows a Python interpreter name).
-3. Look for the `.venv` environment in the list.
 
-You can proceed as normal, and all the packages you have downloaded will be available in the notebook.
+  <img width="505" height="257" alt="image" src="https://github.com/user-attachments/assets/24b8e0d6-e260-4be5-a274-0891e2ab2ae8" />
+  
+3. Look for the `.venv` environment in the list. Make sure that the .venv you are selecting is in the right project folder. Sometimes, especially if you are using uv for multiple projects, there will be other filepaths to different venv's here, so be sure to select the right one by inspecting the filepath next to the env name.
 
-**Note:** If you are working and need to add a new package you can do the following:
+Now you can proceed as normal and use your jupyter notebook to experiment for your project, and all the packages you have downloaded using `uv` will be available in the notebook.
 
-1. In your console, use the command: `uv add PACKAGE_NAME`
-2. Restart your kernel
-3. import the new package as needed
+**Note:** If you are working and need to add a new package, you can use uv directly within the notebook. Within your jupyter notebook, you can add a new cell and use the command: 
+```
+!uv add [NEW PACKAGE NAME]
+```
+This will immediately add the package to the `pyproject.toml` file, change the uv.lock file, and make the package immediately available in your kernel without needing to restart it. You can then import the package as needed, and proceed. It's so fast and easy to use!
 
 ## What to keep (or not keep) in version control
 
 Given the process described above, the most important file to keep in version control is `pyproject.toml`. Both the `.venv/` folder and the `uv.lock` file can be rebuilt using this file so this is the most important file to commit to your github repository.
+
+## Tips and tricks for using `uv`
+
+Here are a few niche things we've noticed from using `uv`:
+- There is nothing restricting a project directory from having more than one venv setup so users should be cautious to ensure that they actually want that behavior, and that they need to activate/deactivate each accordingly ( i've run into messes like (venv1)(venv2) project where I don't know which is actually running.
