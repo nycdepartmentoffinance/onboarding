@@ -114,7 +114,7 @@ uv run main.py
 
 This command runs the main.py script, using the version of python that you indicated. Great! The start to our virtual environment has begun!
 
-#### Connectino with git
+#### Connection with git
 
 It is cool to note that using the command `uv init` also initializes a git repository if one is not already initialized in that project directory. For more on git, check out the [GitHub Set-up Guide](github_setup.md) and [GitHub Workflow Guide](github_workflow.md).
 
