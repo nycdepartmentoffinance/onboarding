@@ -19,3 +19,4 @@ Depending on which language you prefer to program in, here are some guides on ho
   - [Proxy Set-up in Python](proxy_python.md)
   - [Project Set-up in Python](project_setup_python.md)
   - [Database Connections in Python](database_connections_python.ipynb)
+  - [Virtual Environments in Python](virtual_environment_python.md)
