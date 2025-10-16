@@ -34,11 +34,6 @@ The following are software engineering best practices that may not apply to ever
    - Use GitHub **issues** to track bugs, feature requests, and discussions. Clearly label and categorize issues to facilitate workflow management.
    - For every new feature or fix, use **pull requests (PRs)**. Each PR should reference the associated issue and include a description of changes.
    - Ensure PRs are reviewed by relevant team members before merging.
-
-## 8. **CI/CD Integration**
-   - Integrate **continuous integration (CI)** tools to automatically run tests and check code quality on each push.
-   - Consider adding **continuous deployment (CD)** pipelines for automated deployment of production-ready code.
-
 ---
 
 By following these best practices, we ensure that our repositories remain organized, secure, and aligned with the goals of NYC DOF.
