@@ -70,7 +70,7 @@ This means that uv is installed correctly and we're ready to start building our 
 
 One thing that is so awesome about `uv` is that you can install python versions directly using it.
 
-For example, say I want this project to have python 3.12. Let's start by using uv to download that version of python:
+For example, say I want this project to have python 3.11. Let's start by using uv to download that version of python:
 
 ```
 uv python install 3.11
