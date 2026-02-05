@@ -1,5 +1,20 @@
 ## GitHub Set-up and Proxy Configuration Guide
 
+***A brief note before we talk about Git/GitHub:*** As of 1/2026, All DOF employees have access to LinkedIn Learning resources via an agency-wide license. The guide below will give a good overview of the essentials (and help you get fully set-up) but if you are looking for more comprehensive training on how to use git and GitHub, I'd recommend diving more into the trainings available on that platform.
+
+To get set-up with LinkedIn Learning, do the following:
+- Go to https://www.linkedin.com/learning and sign in with your DOF email
+- Once you are signed in, you should be able to access [Mastering GitHub for Data Science](https://www.linkedin.com/learning/collections/7424572568218542080?u=2208145), a collection of trainings that I picked out that I think are the most helpful. I'd recommend the following trainings (more or less in this order, if you are new to git/github):
+    - Git from Scratch (beginner)
+    - Programming Foundations: Version Control with Git (beginner)
+    - 8 Git Commands You Should Know (beginner)
+    - Github Essential Training: 1 The Basics (intermediate)
+    - Git for Teams (advanced)
+
+Now -- on to the scheduled programming!
+
+---
+
 #### What is git and why is it helpful?
 
 Git is a tool (specifically a distributed version control system) that helps developers keep track of changes made to their code over time, manage different versions of files, and collaborate efficiently on software projects. It enables developers to keep a history of all changes made to the codebase, facilitating collaboration among multiple developers, even when working offline. Git makes it easier to organize, store, and share code, making it easier to collaborate and avoid losing important changes.

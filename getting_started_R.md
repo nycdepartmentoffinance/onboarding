@@ -1,4 +1,3 @@
-# Helpful Resources
 
 ## Learning R
 
