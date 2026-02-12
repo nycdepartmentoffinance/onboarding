@@ -38,6 +38,8 @@ http_proxy = YOUR_HOSTNAME:YOUR_PORT
 https_proxy = YOUR_HOSTNAME:YOUR_PORT
 ```
 
+***Note: Do not use `http://` or `https://` in the above. You should only include anything after the = for the hostname.** If you forget this step, you will eventually hit an error when trying to pull data or use packages that rely on the curl package.*
+
 This saves the above as environmental variables that are used when configuring the R session. 
 
 Note: this is a great file to use to save other usernames and passwords that you want to use in your project and want to avoid hard coding them into the scripts. For example, I have the following saved in my .renviron file
