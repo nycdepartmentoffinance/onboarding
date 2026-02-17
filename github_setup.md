@@ -180,6 +180,9 @@ implement the basic usages of git/GitHub.
 **_Note:_** 99% of what we will do will be one of the following commands: `git pull`, `git status`,
 `git add .`, `git commit` and `git push`.
 
+- **Collaborating using Git**  
+  A detailed explanation of the simple/best features of git and how you can use it to work with your team: [Git for Teams](https://notes.jpt.sh/mpd/git-for-teams/)
+
 - **What is Git? Why Should We Use It?**  
   For a detailed overview of Git, check out this super helpful tutorial: [Happy Git with R](https://happygitwithr.com/big-picture).
 
