@@ -26,7 +26,7 @@ Most DOF projects on GitHub are largely developed in either **R** or **Python** 
 
 - [Getting Started in R](getting_started_R.md)
 - [Proxy Set-up in R](proxy_R.md)
-- [Project Set-up in R](project_setup_R.md)
+- [Project Set-up in R](project_setup_r.md)
 - [Database Connections in R](database_connections_R.md)
 
 #### Python
