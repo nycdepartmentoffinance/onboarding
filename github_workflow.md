@@ -171,11 +171,12 @@ This is a critical quality-check step. It keeps the project stable, encourages c
 2. GitHub will often show a **“Compare & pull request”** button at the top—click it  
    _Or:_ go to the **Pull requests** tab and click **“New pull request”**
 3. Choose your branch as the “compare” branch, and `main` as the “base” branch
-4. Fill out:
+4. Click **“Create pull request”**
+5. Fill out:
    - **Title**: Match the issue or describe the change
    - **Description**: What did you do? Why? Anything reviewers should know?
    - Add reviewers or tags as needed
-5. Click **“Create pull request”**
+6. Click **“Create pull request”**
 
 Now your work is up for review and can be discussed, tested, and ultimately merged into the main codebase.
 
