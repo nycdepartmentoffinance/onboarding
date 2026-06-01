@@ -142,7 +142,7 @@ Start by opening up Microsoft Edge and typing in the following to the browser:
 edge://certificate-manager/localcerts/platformcerts
 ```
 
-A screen with all of the certificates configured for your machine should pop up. There should be a blue botton called "Export". Click on that. The default name of the file is `"trusted_certs"`. Edit that to `"trusted_certs.pem"` and save it somewhere local. I navigated to my user drive and saved it there: `C:\Users\BoydClaire`.
+A screen with all of the certificates configured for your machine should pop up. There should be a blue botton called "Export". Click on that. The default name of the file is `"trusted_certs"`. First save it normally as a .crt file. Then, click on export again and edit the filepath to `"trusted_certs.pem"` and save it somewhere local. I navigated to my user drive and saved it there: `C:\Users\BoydClaire`.
 
 Next, open up File Explorer, navigate to that folder, and open up the .pem file. It should look something like this:
 
@@ -158,7 +158,7 @@ sdf;oaiehrtq;welinfoSIDjfosirtho'eirf'isdc
 {continued}.....
 ```
 
-This means that you saved the `.pem` file correctly and you're on the right track. If when you click on the file and it opens up a security certificate, the file was saved as a different format (`.crt`). Export the file again as a `.pem` file and make sure the format is similar to the above.
+This means that you saved the `.pem` file correctly and you're on the right track. If when you click on the file and it opens up a security certificate, the file was saved as a different format (`.crt`). Export the file again as a `.pem` file and make sure the format is similar to the above. You will need both the `.crt` and the `.pem`.
 
 ## Download VSCode
 
