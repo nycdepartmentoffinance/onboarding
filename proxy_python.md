@@ -203,6 +203,7 @@ If there is anything in the `settings.json` file already, delete it. Then, copy 
         // proxy environmental variables
         "HTTP_PROXY": "http://YOUR_HOSTNAME:YOUR_PORT",
         "HTTPS_PROXY": "http://YOUR_HOSTNAME:YOUR_PORT",
+        "SSL_CERT_FILE": "YOUR_PATH_TO_CRT_FILE",
         "REQUESTS_CA_BUNDLE": "YOUR_PATH_TO_PEM_FILE",
         "UV_NATIVE_TLS": "TRUE",
     },
