@@ -16,7 +16,7 @@ Our models can generally be split into three valuation approaches: sales, income
 | Class 3 | Utility company and franchise property | Cost | Real Estate of Utility Corporations (RUC) Unit |
 | Class 4 | Commercial Properties (offices, industrial, retail,etc.)  | Income Comparison | Modeling Unit |
 
-The rest of this guide will be broken down based on the three model types that our unit is responsible for:
+The rest of this guide will be broken down based on the four model types that our unit is responsible for:
 - [Comparable Sales Model](#Comparable-Sales-Model)
 - [Comparable Income Models](#Comparable-Income-Models)
 - [Gross Income Multiplier (GIM) Models](#Gross-Income-Multiplier-(GIM)-Models)
@@ -36,7 +36,7 @@ Our generated market value is the just first step in the process of raising prop
 Comparable sales models are the most accurate and reliable types of models for property valuation, however they require enough properties being sold to be useful. For this reason and due to tax laws, the only types of properties we use comp sales models on are tax class 1 properties. The idea behind these models is that the value of one home will be similar to that of similar homes nearby which recently sold.
 
 ### Data
-Time adjusted sales from the last 2.5 years (or 3.5 years in Manhattan). This data is cleaned to get rid of unqualified sales, which include sales to family members, flip sales, and other unusual sales. 
+Time adjusted sales from the last 2.5 years (or 3.5 years in Manhattan). This data is cleaned to get rid of unqualified sales, which are non-market sales between related parties or instutions. This includes sales that are 'below market' based on being under a certain value varying by borough. This also includes sales to family members, estate sales, foreclosures,  flip sales, and other unusual sales. 
 
 ### Comps
 The first part of the modeling process is to select five comparable properties (generally called comps) that match the physical characteristics of the subject parcel. The way the comps are selected is that a series of weights are selected for key variables. For example:
@@ -138,7 +138,7 @@ The market value of Tax Class 2 and 4 properties are valued based on the income 
 ```math
 MV = \frac{I - E}{C} = \frac{NOI}{C}.
 ```
-Where `MV` is the market value, `I` is income, `E` is expense, `C` is cap rate, and `NOI` is net operating income. In terms of building a model to find the market value the modeling team is responsible for finding the associated income and expense. The cap rate is calculated by ***. So lets dig into finding the income and expense.
+Where `MV` is the market value, `I` is income, `E` is expense, `C` is cap rate, and `NOI` is net operating income. In terms of building a model to find the market value the modeling team is responsible for finding the associated income and expense. The cap rate is calculated by Carmela. So lets dig into finding the income and expense.
 
 ### Data
 The input data for an income model comes from the Real Property Income and Expense (RPIE) Statements. These are forms that all profit earning properties that make more than $40,000 per year must submit annually. The RPIE provides the self reported income and expense associated with the property. After receiving these forms assessors go through them and either approve or reject the values for income and expense. The approved parcels get stamped by the assessor and become potential comps for the other parcels as well as part of the training set for the modelers. A model is required to predict the income and expense for all the parcels that assessors didn't approved, along with all condos, and any parcel that didn't file an RPIE.
@@ -227,7 +227,7 @@ For these models each boro is split into 1, 2, or 3 areas and fully residential 
 Where the values in the table are the results of multiplying the GIM percentile value with the income percentile value. 
 
 ### Stabilization
-Once these values are found stabilization is put in place to ensure that there aren't large swings in values from year to year. To do this GIM values are compared to last years, producing the ratio (this_year / last_year). The same thing is done for each income level. Different caps are put into place for the GIM ratios. The GIM cap that is used is selected because *****. For each different GIM cap tested the median GIM is set and the other GIMs are stabilized around them. This is confusing so lets look at an example.
+Once these values are found stabilization is put in place to ensure that there aren't large swings in values from year to year. To do this GIM values are compared to last years, producing the ratio (this_year / last_year). The same thing is done for each income level. Different caps are put into place for the GIM ratios. For each different GIM cap tested the median GIM is set and the other GIMs are stabilized around them. This is confusing so lets look at an example.
 
 
 | GIM |10th % | 50th % | 75th % | 90th % |
@@ -321,7 +321,7 @@ S = W_{1} V_{1} + W_{2} V_{2} + W_{3} V_{3} + ... + W_{n} V_{n}.
 Where `S` is the dependent variable, in this case sale price. The `W`s are weights and the `V`s are the independent variables or features. They could be things like size, neighborhood, or zoning.
 
 ### Data
-Sales data from the prior **** years with unqualified sale and outliers removed. 
+Sales data from the prior 3 years with unqualified sale and outliers removed. 
 
 ### Regression
 In a regression all variables need to be numeric. In the example above size is numeric but neighborhood and zoning are both categorical. One way to turn a categorical independent variables into a numeric one is to group by the category and use the median of the target value (dependent variable) for each category. If we take neighborhood as an example we might have a dataset like:
